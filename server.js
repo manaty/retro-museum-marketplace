@@ -14,9 +14,12 @@ export const server=http.createServer(async(req,res)=>{
   if(role==='reviewer'){
    // Cloud Run IAM requires a Google OIDC identity before this private service is reached.
    if(req.method!=='POST'||path!=='/process'){send(res,404,{error:'Not found'});return;}
-   const {id}=await body(req);if(!/^[a-f0-9]{32}$/.test(id||''))throw Error('Invalid job ID.');
+   const {id,retryReason}=await body(req);if(!/^[a-f0-9]{32}$/.test(id||''))throw Error('Invalid job ID.');
    const job=await inbox.get(`jobs/${id}.json`);if(!job){send(res,404,{error:'Job not found'});return;}
-   const prior=await outbox.get(`reports/${id}.json`);if(prior?.completedAt){send(res,200,{status:prior.status});return;}
+   const prior=await outbox.get(`reports/${id}.json`);if(prior?.completedAt){
+    if(typeof retryReason!=='string'||retryReason.trim().length<10){send(res,200,{status:prior.status});return;}
+    await outbox.put(`report-history/${id}/${randomBytes(8).toString('hex')}.json`,{...prior,retryReason:retryReason.slice(0,1000),retriedAt:new Date().toISOString()},{create:true});
+   }
    const result=await processSubmission(job,{inbox,outbox});send(res,200,{status:result.status});return;
   }
   if(req.method==='GET'&&path==='/api/catalog'){

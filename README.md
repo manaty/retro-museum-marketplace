@@ -43,4 +43,6 @@ The initial intake is capped at ten new immutable source commits per UTC day, en
 - `GET /packages/:sha256.json`: previously approved package.
 - Private `POST /process`: queue-driven review, protected by Cloud Run IAM.
 
+An authenticated operator may rerun a completed report by posting `{id,retryReason}` to the private reviewer. A substantive reason is required and the original report is archived before rechecking the same immutable commit. Normal duplicate task delivery does not repeat completed work. This override is not exposed by the public submission form.
+
 Submitter declarations are private intake data. Reports expose repository, commit, package metadata and review findings, not API credentials or player data. See POLICY.md for appeals and content reports.
