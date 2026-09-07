@@ -26,9 +26,9 @@ try{
    const send=()=>frame.contentWindow.postMessage({retroMuseum:1,type:'state',role,state,online:true},'*');
    window.addEventListener('message',event=>{if(event.source!==frame.contentWindow)return;if(event.data?.retroMuseum===1&&event.data.type==='ready'){window.reviewReady=true;send();}});
    const csp="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src https://museum.invalid data:; media-src https://museum.invalid; font-src https://museum.invalid; connect-src 'none'; form-action 'none'; base-uri 'none'";
-   frame.srcdoc=html.replace(/<head([^>]*)>/i,`<head$1><meta http-equiv="Content-Security-Policy" content="${csp}">`);
+   frame.srcdoc=html.replace(/<head(\s[^>]*)?>/i,`<head$1><meta http-equiv="Content-Security-Policy" content="${csp}">`);
    frame.onload=send;
-  },{html:pack.view.includes('<head')?pack.view:pack.view.replace(/<html([^>]*)>/i,'<html$1><head></head>'),state,role});
+  },{html:/<head(?:\s|>)/i.test(pack.view)?pack.view:pack.view.replace(/<html([^>]*)>/i,'<html$1><head></head>'),state,role});
   await page.waitForFunction(()=>window.reviewReady,null,{timeout:5000});
   await page.waitForTimeout(800);
   const frame=page.frames().find(f=>f.parentFrame());
