@@ -2,8 +2,9 @@ import {mkdtemp,writeFile,rm} from 'node:fs/promises';import {tmpdir} from 'node
 import {createRequire} from 'node:module';import {pathToFileURL} from 'node:url';
 import {downloadSubmission,forkReviewed} from './github.js';import {review} from './review.js';import {POLICY_VERSION} from './policy.js';
 import {repository} from '@manaty/retro-museum-sdk/manifest';
+import {renderEvidence} from './render.js';
 const require=createRequire(import.meta.url);const {validateIsolated}=await import(pathToFileURL(resolve(require.resolve('@manaty/retro-museum-sdk'),'../validate.js')).href);
-export async function processSubmission(job,{inbox,outbox,download=downloadSubmission,fork=forkReviewed,ai=review,validate=validateIsolated}){
+export async function processSubmission(job,{inbox,outbox,download=downloadSubmission,fork=forkReviewed,ai=review,validate=validateIsolated,render=renderEvidence}){
  const report={id:job.id,source:job.source,status:'validating',policyVersion:POLICY_VERSION,submittedAt:job.submittedAt};
  const path=`reports/${job.id}.json`;await outbox.put(path,report);
  let dir;
@@ -16,7 +17,9 @@ export async function processSubmission(job,{inbox,outbox,download=downloadSubmi
   else{
    report.status='forking';await outbox.put(path,report);report.fork=await fork(job.source);
    report.status='reviewing';await outbox.put(path,report);
-   report.editorial=await ai(pack,job.declarations);report.status=report.editorial.status;
+   const evidence=await render(join(dir,'game.rmg.json'));
+   report.browser={passed:evidence.passed,reason:evidence.reason||null,failures:evidence.failures||[],screens:(evidence.screens||[]).map(s=>s.role)};
+   report.editorial=await ai(pack,job.declarations,{evidence});report.status=report.editorial.status;
    if(report.status==='approved'){
     // AI approval is never sufficient if coverage is incomplete.
     if(!report.editorial.coverage?.complete)throw Error('Review coverage incomplete.');

@@ -11,4 +11,8 @@ jobs:
         with:
           node-version: '22'
       - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
       - run: npm test
+        env:
+          BROWSER_TEST: '1'
+          PLAYWRIGHT_BROWSERS_PATH: /home/runner/.cache/ms-playwright
