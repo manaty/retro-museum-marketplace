@@ -8,7 +8,9 @@ try{
  browser=await chromium.launch({headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
  const screens=[],failures=[];
  for(const role of ['display','controller']){
-  const context=await browser.newContext({viewport:role==='display'?{width:1280,height:720}:{width:390,height:844},serviceWorkers:'block'});
+  // The opaque iframe already forbids service workers. Playwright's block shim itself
+  // raises SecurityError in such a frame, so use a fresh context without that shim.
+  const context=await browser.newContext({viewport:role==='display'?{width:1280,height:720}:{width:390,height:844}});
   const page=await context.newPage();page.setDefaultTimeout(4000);
   await context.route('**/*',async route=>{
    const u=new URL(route.request().url());if(u.origin!=='https://museum.invalid')return route.abort();
