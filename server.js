@@ -3,6 +3,7 @@ import {CloudTasksClient} from '@google-cloud/tasks';
 import {Store} from './storage.js';import {declarations,POLICY_VERSION,RULES} from './policy.js';import {resolveSubmission} from './github.js';import {processSubmission} from './pipeline.js';
 const inbox=new Store(process.env.INBOX_BUCKET,'.local/inbox'),outbox=new Store(process.env.CATALOG_BUCKET,'.local/catalog');
 const firstParty=JSON.parse(await readFile(new URL('./first-party.json',import.meta.url),'utf8'));
+const playOrigin=new URL(process.env.PLAY_ORIGIN||'https://retro-museum-games-482805962191.asia-southeast1.run.app').origin;
 if(process.env.PLAY_ORIGIN){const origin=new URL(process.env.PLAY_ORIGIN);if(origin.protocol!=='https:')throw Error('PLAY_ORIGIN must use HTTPS');for(const game of firstParty)game.playUrl=origin.origin+'/g/'+game.id;}
 const role=process.env.SERVICE_ROLE||'local';const tasks=process.env.TASK_QUEUE?new CloudTasksClient():null;
 const sha=x=>createHash('sha256').update(x).digest('hex');
@@ -25,7 +26,7 @@ export const server=http.createServer(async(req,res)=>{
    const result=await processSubmission(job,{inbox,outbox});send(res,200,{status:result.status});return;
   }
   if(req.method==='GET'&&path==='/api/catalog'){
-   const keys=await outbox.list('games/');const games=(await Promise.all(keys.map(k=>outbox.get(k)))).filter(g=>g&&!g.withdrawn);send(res,200,{schemaVersion:1,policyVersion:POLICY_VERSION,games:[...firstParty,...games.filter(g=>!firstParty.some(p=>p.id===g.id))]});return;
+   const keys=await outbox.list('games/');const games=(await Promise.all(keys.map(k=>outbox.get(k)))).filter(g=>g&&!g.withdrawn).map(g=>({...g,catalogType:'reviewed',playUrl:playOrigin+'/g/'+encodeURIComponent(g.id)}));send(res,200,{schemaVersion:1,policyVersion:POLICY_VERSION,games:[...firstParty,...games.filter(g=>!firstParty.some(p=>p.id===g.id))]});return;
   }
   if(req.method==='GET'&&path==='/api/policy'){send(res,200,{version:POLICY_VERSION,rules:RULES});return;}
   if(req.method==='POST'&&path==='/api/submissions'){
