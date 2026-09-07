@@ -4,7 +4,7 @@
     "manifest": {
       "schemaVersion": 1,
       "id": "tanks",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "title": {
         "en": "Tanks · Ricochets",
         "fr": "Tanks · Ricochets",
@@ -33,10 +33,10 @@
       "activityKey": "tanks",
       "options": {}
     },
-    "sha256": "8c189029ec0c8b382f438fd60bcd40eab717ffcdca4262cf5079150513b7c3f7",
+    "sha256": "01a92b54dcf0aad87be2c92504522d531a485c88434def397a657a899774fe63",
     "source": {
       "url": "https://github.com/manaty/game-tanks",
-      "commit": "f6b9abff888fad14040bc42dfe96c3fc4df39fa3"
+      "commit": "d5911ef96a7c400fc06eeb4848083510d3944176"
     },
     "fork": {
       "url": "https://github.com/manaty/game-tanks"
@@ -51,7 +51,7 @@
     "manifest": {
       "schemaVersion": 1,
       "id": "uno",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "title": {
         "en": "UNO · Color party",
         "fr": "UNO · Partie colorée",
@@ -80,10 +80,10 @@
       "activityKey": "uno",
       "options": {}
     },
-    "sha256": "b166a760b55b06a785be29164414a5aa2ac4ea6de4f512083cdfc62df792efc6",
+    "sha256": "5d7c8a2c785d366954129b278e43e36851d38a539256e8756b74c30b2e45ad42",
     "source": {
       "url": "https://github.com/manaty/game-uno",
-      "commit": "e60c81d30c2d6e9367ba663ef4996da99c354cd2"
+      "commit": "1784f3aa144a813b8e473aae8de09f350ed99620"
     },
     "fork": {
       "url": "https://github.com/manaty/game-uno"
@@ -98,7 +98,7 @@
     "manifest": {
       "schemaVersion": 1,
       "id": "kart",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "title": {
         "en": "Kart · Grand Prix",
         "fr": "Kart · Grand Prix",
@@ -140,10 +140,10 @@
         }
       }
     },
-    "sha256": "3672e7ed18d418ce9a9c7a0e0710ecde182502ed0a5c59c5d098581e9c39fb17",
+    "sha256": "ad9eedbf9b058d67c0c37f8bb0603167af314fa5a3c4fc113f6cd310acdf9fa1",
     "source": {
       "url": "https://github.com/manaty/game-kart",
-      "commit": "58cbf9fe0c6a00d1fe1666b9d4dd843ab48ce83b"
+      "commit": "3976de7f95f6c73a826db4e3e312215f9474f1f6"
     },
     "fork": {
       "url": "https://github.com/manaty/game-kart"
@@ -158,7 +158,7 @@
     "manifest": {
       "schemaVersion": 1,
       "id": "monopoly",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "title": {
         "en": "Monopoly · Property party",
         "fr": "Monopoly · Les propriétés",
@@ -187,10 +187,10 @@
       "activityKey": "monopoly",
       "options": {}
     },
-    "sha256": "78444c098abe53dedbbf8dd6c10ddef34d3c62ac59eac57f98ce8d91d68c88d7",
+    "sha256": "d628b96d3d35c85697ce5b08eb85caf4b8a02518117e252c344596521ac9678b",
     "source": {
       "url": "https://github.com/manaty/game-monopoly",
-      "commit": "66fa82f69536c2c8867fed0c2232b4504d0165f3"
+      "commit": "ae17b624798b9e28401a64891c66445c3d8ac433"
     },
     "fork": {
       "url": "https://github.com/manaty/game-monopoly"
@@ -205,7 +205,7 @@
     "manifest": {
       "schemaVersion": 1,
       "id": "werewolf-village",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "title": {
         "en": "Werewolves · The village",
         "fr": "Loups-garous · Le village",
@@ -262,10 +262,10 @@
       },
       "cover": "scenes/werewolf-day.png"
     },
-    "sha256": "fa72490d4a0078520a5d02a3b631961b70d3c0df5be458ce18f0c3a2936703bf",
+    "sha256": "5faa0a636ae10e6bfd464f28c95377b6362c6949d53f561cb98b75d90626bb2d",
     "source": {
       "url": "https://github.com/manaty/game-werewolf",
-      "commit": "87fde93e0f123f01aca37c38d00afd59874ecc0b"
+      "commit": "131803645e69d6dea724ee9e829cab45f38d8528"
     },
     "fork": {
       "url": "https://github.com/manaty/game-werewolf"
@@ -280,7 +280,7 @@
     "manifest": {
       "schemaVersion": 1,
       "id": "zx80",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "title": {
         "en": "ZX80 · The secret number",
         "fr": "ZX80 · Le nombre secret",
@@ -309,10 +309,10 @@
       "permissions": [],
       "activityKey": "zx80"
     },
-    "sha256": "23586ace898c7c002bd5a0715042e9b7c0d9bf819e00ea5d71adcfd5143db08a",
+    "sha256": "91b284bb98e8c9edf81503be03b9de12a5bc05781b6678869d71a5ffe16438e7",
     "source": {
       "url": "https://github.com/manaty/game-zx80",
-      "commit": "d682deb2f68d72471f342f042f413896a0333f7a"
+      "commit": "331895724d01e7364be161bd055e7ae49cbc1cad"
     },
     "fork": {
       "url": "https://github.com/manaty/game-zx80"

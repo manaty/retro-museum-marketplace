@@ -3,6 +3,7 @@ import {CloudTasksClient} from '@google-cloud/tasks';
 import {Store} from './storage.js';import {declarations,POLICY_VERSION,RULES} from './policy.js';import {resolveSubmission} from './github.js';import {processSubmission} from './pipeline.js';
 const inbox=new Store(process.env.INBOX_BUCKET,'.local/inbox'),outbox=new Store(process.env.CATALOG_BUCKET,'.local/catalog');
 const firstParty=JSON.parse(await readFile(new URL('./first-party.json',import.meta.url),'utf8'));
+if(process.env.PLAY_ORIGIN){const origin=new URL(process.env.PLAY_ORIGIN);if(origin.protocol!=='https:')throw Error('PLAY_ORIGIN must use HTTPS');for(const game of firstParty)game.playUrl=origin.origin+'/g/'+game.id;}
 const role=process.env.SERVICE_ROLE||'local';const tasks=process.env.TASK_QUEUE?new CloudTasksClient():null;
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const send=(res,status,value)=>{res.writeHead(status,{'Content-Type':'application/json','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(JSON.stringify(value));};
