@@ -1,0 +1,19 @@
+{
+  "name": "@manaty/retro-museum-marketplace",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@google-cloud/storage": "8.0.1",
+    "@google-cloud/tasks": "7.0.0",
+    "@manaty/retro-museum-sdk": "https://github.com/manaty/retro-museum-sdk/archive/bc4ad2a5aa1f8627eaf09afef351508aaffc9f3d.tar.gz"
+  }
+}
