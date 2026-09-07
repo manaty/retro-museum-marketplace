@@ -1,0 +1,325 @@
+[
+  {
+    "id": "tanks",
+    "manifest": {
+      "schemaVersion": 1,
+      "id": "tanks",
+      "version": "1.0.0",
+      "title": {
+        "en": "Tanks · Ricochets",
+        "fr": "Tanks · Ricochets",
+        "tl": "Mga Tangke · Ricochets"
+      },
+      "description": {
+        "en": "Play Tanks · Ricochets together on a shared screen, using phones as controllers. 2–5 players.",
+        "fr": "Jouez à Tanks · Ricochets ensemble sur un écran partagé, avec les téléphones comme manettes. 2 à 5 joueurs.",
+        "tl": "Maglaro ng Mga Tangke · Ricochets sa isang shared screen gamit ang mga telepono. 2–5 na manlalaro."
+      },
+      "author": "Manaty",
+      "license": "MIT",
+      "languages": [
+        "en",
+        "fr",
+        "tl"
+      ],
+      "players": {
+        "min": 2,
+        "max": 5
+      },
+      "durationMinutes": 15,
+      "runtime": "quickjs-v1",
+      "entry": "dist/game.rmg.json",
+      "permissions": [],
+      "activityKey": "tanks",
+      "options": {}
+    },
+    "sha256": "8c189029ec0c8b382f438fd60bcd40eab717ffcdca4262cf5079150513b7c3f7",
+    "source": {
+      "url": "https://github.com/manaty/game-tanks",
+      "commit": "f6b9abff888fad14040bc42dfe96c3fc4df39fa3"
+    },
+    "fork": {
+      "url": "https://github.com/manaty/game-tanks"
+    },
+    "catalogType": "publisher_preview",
+    "publisher": "Manaty",
+    "playUrl": "https://retro-museum-games-482805962191.asia-southeast1.run.app/g/tanks",
+    "screenshot": "/screens/tanks.png"
+  },
+  {
+    "id": "uno",
+    "manifest": {
+      "schemaVersion": 1,
+      "id": "uno",
+      "version": "1.0.0",
+      "title": {
+        "en": "UNO · Color party",
+        "fr": "UNO · Partie colorée",
+        "tl": "UNO · Makulay na laro"
+      },
+      "description": {
+        "en": "Play UNO · Color party together on a shared screen, using phones as controllers. 2–7 players.",
+        "fr": "Jouez à UNO · Partie colorée ensemble sur un écran partagé, avec les téléphones comme manettes. 2 à 7 joueurs.",
+        "tl": "Maglaro ng UNO · Makulay na laro sa isang shared screen gamit ang mga telepono. 2–7 na manlalaro."
+      },
+      "author": "Manaty",
+      "license": "MIT",
+      "languages": [
+        "en",
+        "fr",
+        "tl"
+      ],
+      "players": {
+        "min": 2,
+        "max": 7
+      },
+      "durationMinutes": 15,
+      "runtime": "quickjs-v1",
+      "entry": "dist/game.rmg.json",
+      "permissions": [],
+      "activityKey": "uno",
+      "options": {}
+    },
+    "sha256": "b166a760b55b06a785be29164414a5aa2ac4ea6de4f512083cdfc62df792efc6",
+    "source": {
+      "url": "https://github.com/manaty/game-uno",
+      "commit": "e60c81d30c2d6e9367ba663ef4996da99c354cd2"
+    },
+    "fork": {
+      "url": "https://github.com/manaty/game-uno"
+    },
+    "catalogType": "publisher_preview",
+    "publisher": "Manaty",
+    "playUrl": "https://retro-museum-games-482805962191.asia-southeast1.run.app/g/uno",
+    "screenshot": "/screens/uno.png"
+  },
+  {
+    "id": "kart",
+    "manifest": {
+      "schemaVersion": 1,
+      "id": "kart",
+      "version": "1.0.0",
+      "title": {
+        "en": "Kart · Grand Prix",
+        "fr": "Kart · Grand Prix",
+        "tl": "Kart · Grand Prix"
+      },
+      "description": {
+        "en": "Play Kart · Grand Prix together on a shared screen, using phones as controllers. 2–5 players.",
+        "fr": "Jouez à Kart · Grand Prix ensemble sur un écran partagé, avec les téléphones comme manettes. 2 à 5 joueurs.",
+        "tl": "Maglaro ng Kart · Grand Prix sa isang shared screen gamit ang mga telepono. 2–5 na manlalaro."
+      },
+      "author": "Manaty",
+      "license": "MIT",
+      "languages": [
+        "en",
+        "fr",
+        "tl"
+      ],
+      "players": {
+        "min": 2,
+        "max": 5
+      },
+      "durationMinutes": 15,
+      "runtime": "quickjs-v1",
+      "entry": "dist/game.rmg.json",
+      "permissions": [],
+      "activityKey": "kart",
+      "options": {
+        "laps": {
+          "label": {
+            "en": "Laps",
+            "fr": "Tours",
+            "tl": "Mga ikot"
+          },
+          "values": [
+            3,
+            5
+          ],
+          "default": 3
+        }
+      }
+    },
+    "sha256": "3672e7ed18d418ce9a9c7a0e0710ecde182502ed0a5c59c5d098581e9c39fb17",
+    "source": {
+      "url": "https://github.com/manaty/game-kart",
+      "commit": "58cbf9fe0c6a00d1fe1666b9d4dd843ab48ce83b"
+    },
+    "fork": {
+      "url": "https://github.com/manaty/game-kart"
+    },
+    "catalogType": "publisher_preview",
+    "publisher": "Manaty",
+    "playUrl": "https://retro-museum-games-482805962191.asia-southeast1.run.app/g/kart",
+    "screenshot": "/screens/kart.png"
+  },
+  {
+    "id": "monopoly",
+    "manifest": {
+      "schemaVersion": 1,
+      "id": "monopoly",
+      "version": "1.0.0",
+      "title": {
+        "en": "Monopoly · Property party",
+        "fr": "Monopoly · Les propriétés",
+        "tl": "Monopoly · Ari-arian"
+      },
+      "description": {
+        "en": "Play Monopoly · Property party together on a shared screen, using phones as controllers. 2–6 players.",
+        "fr": "Jouez à Monopoly · Les propriétés ensemble sur un écran partagé, avec les téléphones comme manettes. 2 à 6 joueurs.",
+        "tl": "Maglaro ng Monopoly · Ari-arian sa isang shared screen gamit ang mga telepono. 2–6 na manlalaro."
+      },
+      "author": "Manaty",
+      "license": "MIT",
+      "languages": [
+        "en",
+        "fr",
+        "tl"
+      ],
+      "players": {
+        "min": 2,
+        "max": 6
+      },
+      "durationMinutes": 15,
+      "runtime": "quickjs-v1",
+      "entry": "dist/game.rmg.json",
+      "permissions": [],
+      "activityKey": "monopoly",
+      "options": {}
+    },
+    "sha256": "78444c098abe53dedbbf8dd6c10ddef34d3c62ac59eac57f98ce8d91d68c88d7",
+    "source": {
+      "url": "https://github.com/manaty/game-monopoly",
+      "commit": "66fa82f69536c2c8867fed0c2232b4504d0165f3"
+    },
+    "fork": {
+      "url": "https://github.com/manaty/game-monopoly"
+    },
+    "catalogType": "publisher_preview",
+    "publisher": "Manaty",
+    "playUrl": "https://retro-museum-games-482805962191.asia-southeast1.run.app/g/monopoly",
+    "screenshot": "/screens/monopoly.png"
+  },
+  {
+    "id": "werewolf-village",
+    "manifest": {
+      "schemaVersion": 1,
+      "id": "werewolf-village",
+      "version": "1.1.0",
+      "title": {
+        "en": "Werewolves · The village",
+        "fr": "Loups-garous · Le village",
+        "tl": "Mga Taong-lobo · Ang nayon"
+      },
+      "description": {
+        "en": "Play Werewolves · The village together on a shared screen, using phones as controllers. 4–16 players.",
+        "fr": "Jouez à Loups-garous · Le village ensemble sur un écran partagé, avec les téléphones comme manettes. 4 à 16 joueurs.",
+        "tl": "Maglaro ng Mga Taong-lobo · Ang nayon sa isang shared screen gamit ang mga telepono. 4–16 na manlalaro."
+      },
+      "author": "Manaty",
+      "license": "MIT",
+      "languages": [
+        "en",
+        "fr",
+        "tl"
+      ],
+      "players": {
+        "min": 4,
+        "max": 16
+      },
+      "durationMinutes": 60,
+      "runtime": "quickjs-v1",
+      "entry": "dist/game.rmg.json",
+      "permissions": [],
+      "activityKey": "werewolf",
+      "options": {
+        "debateSeconds": {
+          "label": {
+            "en": "Discussion (seconds)",
+            "fr": "Discussion (secondes)",
+            "tl": "Talakayan (segundo)"
+          },
+          "values": [
+            60,
+            90,
+            120,
+            180
+          ],
+          "default": 90
+        },
+        "nightMode": {
+          "label": {
+            "en": "Night mode",
+            "fr": "Mode de nuit",
+            "tl": "Paraan sa gabi"
+          },
+          "values": [
+            "classic",
+            "openEyes"
+          ],
+          "default": "openEyes"
+        }
+      },
+      "cover": "scenes/werewolf-day.png"
+    },
+    "sha256": "fa72490d4a0078520a5d02a3b631961b70d3c0df5be458ce18f0c3a2936703bf",
+    "source": {
+      "url": "https://github.com/manaty/game-werewolf",
+      "commit": "87fde93e0f123f01aca37c38d00afd59874ecc0b"
+    },
+    "fork": {
+      "url": "https://github.com/manaty/game-werewolf"
+    },
+    "catalogType": "publisher_preview",
+    "publisher": "Manaty",
+    "playUrl": "https://retro-museum-games-482805962191.asia-southeast1.run.app/g/werewolf-village",
+    "screenshot": "/screens/werewolf.png"
+  },
+  {
+    "id": "zx80",
+    "manifest": {
+      "schemaVersion": 1,
+      "id": "zx80",
+      "version": "1.0.0",
+      "title": {
+        "en": "ZX80 · The secret number",
+        "fr": "ZX80 · Le nombre secret",
+        "tl": "ZX80 · Ang lihim na bilang"
+      },
+      "description": {
+        "en": "A real ZX80 emulator. Explore the 1980 computer in 3D, then play an original BASIC guessing game with its touch keyboard.",
+        "fr": "Un véritable émulateur ZX80 : découvrez la machine de 1980 en 3D, puis jouez à un jeu BASIC original avec son clavier tactile.",
+        "tl": "Isang tunay na ZX80 emulator. Tingnan sa 3D ang computer ng 1980 at maglaro gamit ang touch keyboard."
+      },
+      "author": "Manaty",
+      "license": "MIT",
+      "languages": [
+        "en",
+        "fr",
+        "tl"
+      ],
+      "players": {
+        "min": 1,
+        "max": 1
+      },
+      "durationMinutes": 15,
+      "introMs": 16000,
+      "runtime": "native-v1",
+      "entry": "dist/game.rmg.json",
+      "permissions": [],
+      "activityKey": "zx80"
+    },
+    "sha256": "23586ace898c7c002bd5a0715042e9b7c0d9bf819e00ea5d71adcfd5143db08a",
+    "source": {
+      "url": "https://github.com/manaty/game-zx80",
+      "commit": "d682deb2f68d72471f342f042f413896a0333f7a"
+    },
+    "fork": {
+      "url": "https://github.com/manaty/game-zx80"
+    },
+    "catalogType": "publisher_preview",
+    "publisher": "Manaty",
+    "playUrl": "https://retro-museum-games-482805962191.asia-southeast1.run.app/g/zx80",
+    "screenshot": "/screens/zx80.png"
+  }
+]

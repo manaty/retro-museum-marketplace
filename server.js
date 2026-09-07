@@ -2,6 +2,7 @@ import http from 'node:http';import {readFile} from 'node:fs/promises';import {r
 import {CloudTasksClient} from '@google-cloud/tasks';
 import {Store} from './storage.js';import {declarations,POLICY_VERSION,RULES} from './policy.js';import {resolveSubmission} from './github.js';import {processSubmission} from './pipeline.js';
 const inbox=new Store(process.env.INBOX_BUCKET,'.local/inbox'),outbox=new Store(process.env.CATALOG_BUCKET,'.local/catalog');
+const firstParty=JSON.parse(await readFile(new URL('./first-party.json',import.meta.url),'utf8'));
 const role=process.env.SERVICE_ROLE||'local';const tasks=process.env.TASK_QUEUE?new CloudTasksClient():null;
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const send=(res,status,value)=>{res.writeHead(status,{'Content-Type':'application/json','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(JSON.stringify(value));};
@@ -23,7 +24,7 @@ export const server=http.createServer(async(req,res)=>{
    const result=await processSubmission(job,{inbox,outbox});send(res,200,{status:result.status});return;
   }
   if(req.method==='GET'&&path==='/api/catalog'){
-   const keys=await outbox.list('games/');const games=(await Promise.all(keys.map(k=>outbox.get(k)))).filter(g=>g&&!g.withdrawn);send(res,200,{schemaVersion:1,policyVersion:POLICY_VERSION,games});return;
+   const keys=await outbox.list('games/');const games=(await Promise.all(keys.map(k=>outbox.get(k)))).filter(g=>g&&!g.withdrawn);send(res,200,{schemaVersion:1,policyVersion:POLICY_VERSION,games:[...firstParty,...games.filter(g=>!firstParty.some(p=>p.id===g.id))]});return;
   }
   if(req.method==='GET'&&path==='/api/policy'){send(res,200,{version:POLICY_VERSION,rules:RULES});return;}
   if(req.method==='POST'&&path==='/api/submissions'){
@@ -47,6 +48,7 @@ export const server=http.createServer(async(req,res)=>{
    const bytes=await outbox.bytes(path.slice(1));res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'public, max-age=31536000, immutable','Access-Control-Allow-Origin':'*','X-Content-Type-Options':'nosniff'});res.end(bytes);return;
   }
   if(req.method==='GET'&&(path==='/'||path==='/retro-museum')){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'self' https://nexlink-web-3vxjlkppba-as.a.run.app https://nexlink.manaty.net https://nexlink.app",'Referrer-Policy':'no-referrer'});res.end(await readFile(new URL('./public/index.html',import.meta.url)));return;}
+  if(req.method==='GET'&&/^\/screens\/(tanks|uno|kart|monopoly|werewolf|zx80)\.png$/.test(path)){res.writeHead(200,{'Content-Type':'image/png','Cache-Control':'public,max-age=3600','X-Content-Type-Options':'nosniff'});res.end(await readFile(new URL('./public'+path,import.meta.url)));return;}
   if(req.method==='GET'&&['/app.js','/style.css'].includes(path)){res.writeHead(200,{'Content-Type':path.endsWith('.js')?'text/javascript':'text/css','Cache-Control':'no-cache','X-Content-Type-Options':'nosniff'});res.end(await readFile(new URL('./public'+path,import.meta.url)));return;}
   send(res,404,{error:'Not found'});
  }catch(error){console.error('Request failed:',error.message);send(res,['ENOENT',404].includes(error.code)?404:400,{error:String(error.message).slice(0,500)});}
