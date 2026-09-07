@@ -12,6 +12,12 @@ export async function review(pack,declaration,{key=process.env.OPENAI_API_KEY,mo
  if(!response.ok)throw Error(`AI reviewer unavailable (${response.status}).`);
  const result=await response.json();if(result.status!=='completed')throw Error('AI review was incomplete.');
  const text=(result.output||[]).flatMap(x=>x.content||[]).filter(x=>x.type==='output_text').map(x=>x.text).join('');
- const report=JSON.parse(text);const status=publicationDecision(report,coverage);
+ const report=JSON.parse(text);publicationDecision(report,coverage);
+ // Do not present source-only inference as proof of a successful interactive playthrough.
+ for(const finding of report.findings){
+  if(['QUALITY-01','UX-01'].includes(finding.rule)&&finding.result==='pass'&&!coverage.interactivePlaythrough){finding.result='uncertain';finding.reason='Source inspection suggests compatibility, but an interactive display/phone check is required. '+finding.reason;}
+  if(finding.rule==='SAFE-01'&&finding.result==='pass'&&coverage.audioReviewed<coverage.audioTotal){finding.result='uncertain';finding.reason='Audio content has not yet been inspected. '+finding.reason;}
+ }
+ const status=publicationDecision(report,coverage);
  return {...report,status,policyVersion:POLICY_VERSION,model,responseId:result.id,coverage};
 }

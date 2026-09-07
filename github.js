@@ -30,6 +30,9 @@ export async function forkReviewed(source){
  let existing;try{existing=await req(`/repos/${fullName}`);}catch(error){if(!error.message.includes('(404)'))throw error;}
  if(existing&&(!existing.fork||existing.parent?.full_name?.toLowerCase()!==source.fullName))throw Error('Review fork name is already in use.');
  if(!existing)await req(`/repos/${source.fullName}/forks`,'POST',{organization:'manaty',name,default_branch_only:false});
+ // Fork creation is asynchronous. Give GitHub time to make the repository available.
+ if(!existing){for(let attempt=0;attempt<6;attempt++){try{existing=await req(`/repos/${fullName}`);break;}catch(error){if(!error.message.includes('(404)')||attempt===5)throw error;await new Promise(resolve=>setTimeout(resolve,1000*(attempt+1)));}}}
+ if(!existing?.fork||existing.parent?.full_name?.toLowerCase()!==source.fullName)throw Error('Unexpected review fork identity.');
  await req(`/repos/${fullName}/actions/permissions`,'PUT',{enabled:false});
  const ref='review/'+source.commit;
  try{await req(`/repos/${fullName}/git/refs`,'POST',{ref:'refs/heads/'+ref,sha:source.commit});}catch(error){if(!error.message.includes('(422)'))throw error;const found=await req(`/repos/${fullName}/git/ref/heads/${ref}`);if(found.object?.sha!==source.commit)throw Error('Review reference does not match submitted commit.');}
