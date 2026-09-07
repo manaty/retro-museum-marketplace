@@ -33,6 +33,7 @@ try{
   await page.waitForTimeout(800);
   const frame=page.frames().find(f=>f.parentFrame());
   const text=frame?await frame.locator('body').innerText({timeout:3000}):'';
+  if(frame){await frame.waitForFunction(()=>Array.from(document.images).every(img=>img.complete),null,{timeout:3000}).catch(()=>{});const broken=await frame.locator('img').evaluateAll(images=>images.filter(img=>!img.complete||img.naturalWidth===0).length);if(broken)errors.push(`${broken} image(s) failed to load.`);}
   if(text.trim().length<10||errors.length)failures.push({role,errors:errors.length?errors:['Initial screen has no readable text.']});
   screens.push({role,image:(await page.screenshot({type:'png'})).toString('base64'),text:text.slice(0,12000)});
   await context.close();
