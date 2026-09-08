@@ -455,5 +455,83 @@
     "publisher": "Manaty",
     "playUrl": "https://play.retro-museum.net/g/quizz",
     "screenshot": "/screens/quizz.png"
+  },
+  {
+    "id": "marbble",
+    "manifest": {
+      "schemaVersion": 1,
+      "id": "marbble",
+      "version": "1.0.1",
+      "title": {
+        "en": "Marbble · Words without borders",
+        "fr": "Marbble · Les mots sans frontières",
+        "tl": "Marbble · Mga salitang walang hangganan"
+      },
+      "description": {
+        "en": "Build words together in English, French, Tagalog or Spanish. One shared board, your own letters. 1–8 players.",
+        "fr": "Formez des mots en anglais, français, tagalog ou espagnol. Un plateau partagé, vos lettres privées. 1 à 8 joueurs.",
+        "tl": "Bumuo ng mga salita sa Ingles, Pranses, Tagalog o Espanyol. Iisang board, sariling mga letra. 1–8 manlalaro."
+      },
+      "author": "Manaty",
+      "license": "GPL-3.0-only",
+      "languages": [
+        "en",
+        "fr",
+        "tl"
+      ],
+      "players": {
+        "min": 1,
+        "max": 8
+      },
+      "durationMinutes": 30,
+      "runtime": "quickjs-v1",
+      "entry": "dist/game.rmg.json",
+      "permissions": [],
+      "activityKey": "marbble",
+      "options": {
+        "mode": {
+          "label": {
+            "en": "Word mode",
+            "fr": "Mode de jeu",
+            "tl": "Paraan ng laro"
+          },
+          "values": [
+            "multilingual",
+            "classic"
+          ],
+          "default": "multilingual"
+        },
+        "turnSeconds": {
+          "label": {
+            "en": "Seconds per turn",
+            "fr": "Secondes par tour",
+            "tl": "Segundo bawat turno"
+          },
+          "values": [
+            30,
+            60,
+            90,
+            120
+          ],
+          "default": 90
+        }
+      }
+    },
+    "sha256": "e5dce5de39882e01aecdb5af435bf4377b9f66e8eba232097624b3ea32fd04c0",
+    "source": {
+      "url": "https://github.com/manaty/game-marbble",
+      "commit": "0caf757d3306b36aa1d844e2f4b141104f50a27f"
+    },
+    "fork": {
+      "url": "https://github.com/manaty/game-marbble"
+    },
+    "catalogType": "publisher_preview",
+    "publisher": "Manaty",
+    "playUrl": "https://play.retro-museum.net/g/marbble",
+    "screenshot": "/screens/marbble.png",
+    "categories": [
+      "board",
+      "education"
+    ]
   }
 ]
