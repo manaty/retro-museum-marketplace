@@ -539,7 +539,7 @@
     "manifest": {
       "schemaVersion": 1,
       "id": "sketch",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "title": {
         "en": "Sketch · Draw & guess",
         "fr": "Sketch · Dessine et devine",
@@ -596,10 +596,10 @@
         }
       }
     },
-    "sha256": "abedee9dcc9ccc29241e9267a7d390f29f0872d87dec737148e0cd188bfce5ad",
+    "sha256": "8310271873df3210d5fd023c9c9ecdbb8c08e7f370a349e59c1611dd27888d1f",
     "source": {
       "url": "https://github.com/manaty/game-sketch",
-      "commit": "e80632f140843835ad6917190bafcb59159113d5"
+      "commit": "fab9abf96e753d21ba80a5a4c319b4ae423c9edf"
     },
     "fork": {
       "url": "https://github.com/manaty/game-sketch"
@@ -618,7 +618,7 @@
     "manifest": {
       "schemaVersion": 1,
       "id": "chess",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "title": {
         "en": "Chess · Blitz duel",
         "fr": "Échecs · Duel blitz",
@@ -662,10 +662,10 @@
         }
       }
     },
-    "sha256": "786fc9fac2790834c8742637bc336b4de81fc9d892adbd8b70f75bf96e7eebb3",
+    "sha256": "a5a87c5c16b3f39f8db38ceeb965b7d0ab947264d9e5caee07c931d88342c0d1",
     "source": {
       "url": "https://github.com/manaty/game-chess",
-      "commit": "65fcb8f94b742ccc5743c0b4aa69e272e1100837"
+      "commit": "0ddca11530c044bbe9faf0a2a0de67898a045036"
     },
     "fork": {
       "url": "https://github.com/manaty/game-chess"
