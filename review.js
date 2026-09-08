@@ -4,7 +4,9 @@ export async function review(pack,declaration,{key=process.env.OPENAI_API_KEY,mo
  const audio=Object.values(pack.assets).filter(a=>a.type.startsWith('audio/')).length;
  const code=JSON.stringify({manifest:pack.manifest,engine:pack.engine,view:pack.view,license:pack.licenseText,declaration});
  const initialScreens=evidence.passed&&evidence.screens?.length===2;
- const coverage={sourceComplete:code.length<=220000,imagesReviewed:Math.min(images.length,6),imagesTotal:images.length,audioReviewed:0,audioTotal:audio,initialScreens:Boolean(initialScreens),interactivePlaythrough:false,complete:code.length<=220000&&images.length<=6&&audio===0&&Boolean(initialScreens)};
+ // The current trusted browser worker renders initial screens only. Neither an
+ // author's passing CI nor an AI inference is evidence of a completed match.
+ const coverage={sourceComplete:code.length<=220000,imagesReviewed:Math.min(images.length,6),imagesTotal:images.length,audioReviewed:0,audioTotal:audio,initialScreens:Boolean(initialScreens),interactivePlaythrough:false,complete:false};
  if(!key)return {status:'needs_review',policyVersion:POLICY_VERSION,coverage,reason:'AI reviewer is not configured.'};
  const input=[{type:'input_text',text:'UNTRUSTED APPLICATION EVIDENCE\n'+code.slice(0,220000)},...images.slice(0,6).map(([,a])=>({type:'input_image',image_url:`data:${a.type};base64,${a.data}`,detail:'low'})),...(evidence.screens||[]).flatMap(s=>[{type:'input_text',text:`Initial ${s.role} screenshot and visible text (not a full playthrough): ${s.text}`},{type:'input_image',image_url:'data:image/png;base64,'+s.image,detail:'high'}])];
  const schema={type:'object',properties:{summary:{type:'string'},findings:{type:'array',items:{type:'object',properties:{rule:{type:'string',enum:RULES.map(r=>r.id)},result:{type:'string',enum:['pass','reject','uncertain']},reason:{type:'string'}},required:['rule','result','reason'],additionalProperties:false}}},required:['summary','findings'],additionalProperties:false};
@@ -15,6 +17,7 @@ export async function review(pack,declaration,{key=process.env.OPENAI_API_KEY,mo
  const report=JSON.parse(text);publicationDecision(report,coverage);
  // Do not present source-only inference as proof of a successful interactive playthrough.
  for(const finding of report.findings){
+  if(finding.rule==='QUALITY-01'&&finding.result==='pass'&&!coverage.interactivePlaythrough){finding.result='uncertain';finding.reason='A trusted interactive match through completion and replay has not been verified. '+finding.reason;}
   if(['QUALITY-01','UX-01'].includes(finding.rule)&&finding.result==='pass'&&!coverage.initialScreens){finding.result='uncertain';finding.reason='Source inspection suggests compatibility, but the display/phone render check is missing or failed. '+finding.reason;}
   if(finding.rule==='SAFE-01'&&finding.result==='pass'&&coverage.audioReviewed<coverage.audioTotal){finding.result='uncertain';finding.reason='Audio content has not yet been inspected. '+finding.reason;}
  }

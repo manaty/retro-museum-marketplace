@@ -539,7 +539,7 @@
     "manifest": {
       "schemaVersion": 1,
       "id": "sketch",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "title": {
         "en": "Sketch · Draw & guess",
         "fr": "Sketch · Dessine et devine",
@@ -596,34 +596,38 @@
         }
       }
     },
-    "sha256": "cd99e0665767e2aa1435336e558b5376f857e2cd5bdc80555fce96e77bfac50d",
+    "sha256": "abedee9dcc9ccc29241e9267a7d390f29f0872d87dec737148e0cd188bfce5ad",
     "source": {
       "url": "https://github.com/manaty/game-sketch",
-      "commit": "f08cc0da3e54df35832789a6064f36554d693b12"
+      "commit": "e80632f140843835ad6917190bafcb59159113d5"
     },
     "fork": {
       "url": "https://github.com/manaty/game-sketch"
     },
     "catalogType": "publisher_preview",
     "publisher": "Manaty",
-    "playUrl": "https://retro-museum-games-482805962191.asia-southeast1.run.app/g/sketch",
-    "screenshot": "/screens/sketch.png"
+    "playUrl": "https://play.retro-museum.net/g/sketch",
+    "screenshot": "/screens/sketch.png",
+    "categories": [
+      "education",
+      "other"
+    ]
   },
   {
     "id": "chess",
     "manifest": {
       "schemaVersion": 1,
       "id": "chess",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "title": {
         "en": "Chess · Blitz duel",
         "fr": "Échecs · Duel blitz",
         "tl": "Ahedres · Blitz duel"
       },
       "description": {
-        "en": "A two-player chess duel with blitz clocks on the shared screen. Full rules: castling, promotion and every draw.",
-        "fr": "Un duel d'échecs à deux avec horloges blitz sur l'écran partagé. Règles complètes : roque, promotion et toutes les nulles.",
-        "tl": "Duel na ahedres para sa dalawa na may blitz na orasan sa shared screen. Kumpletong patakaran."
+        "en": "A casual two-player chess duel with blitz clocks, castling, en passant, promotion and automatic draws.",
+        "fr": "Un duel d’échecs convivial avec horloges blitz, roque, prise en passant, promotion et nulles automatiques.",
+        "tl": "Ahedres para sa dalawa: blitz na orasan, castling, en passant, promosyon at awtomatikong tabla."
       },
       "author": "Manaty",
       "license": "MIT",
@@ -658,17 +662,20 @@
         }
       }
     },
-    "sha256": "ab5d8e0bfd9c3a82a96a1c3f6b208befa54af1bfb6d426c3112a0602958fd601",
+    "sha256": "786fc9fac2790834c8742637bc336b4de81fc9d892adbd8b70f75bf96e7eebb3",
     "source": {
       "url": "https://github.com/manaty/game-chess",
-      "commit": "cba389702de04099e8d9826fc829502ef9456596"
+      "commit": "65fcb8f94b742ccc5743c0b4aa69e272e1100837"
     },
     "fork": {
       "url": "https://github.com/manaty/game-chess"
     },
     "catalogType": "publisher_preview",
     "publisher": "Manaty",
-    "playUrl": "https://retro-museum-games-482805962191.asia-southeast1.run.app/g/chess",
-    "screenshot": "/screens/chess.png"
+    "playUrl": "https://play.retro-museum.net/g/chess",
+    "screenshot": "/screens/chess.png",
+    "categories": [
+      "board"
+    ]
   }
 ]

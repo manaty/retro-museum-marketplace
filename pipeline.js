@@ -3,6 +3,7 @@ import {createRequire} from 'node:module';import {pathToFileURL} from 'node:url'
 import {downloadSubmission,forkReviewed} from './github.js';import {review} from './review.js';import {POLICY_VERSION} from './policy.js';
 import {repository} from '@manaty/retro-museum-sdk/manifest';
 import {renderEvidence} from './render.js';
+import firstParty from './first-party.json' with {type:'json'};
 const require=createRequire(import.meta.url);const {validateIsolated}=await import(pathToFileURL(resolve(require.resolve('@manaty/retro-museum-sdk'),'../validate.js')).href);
 export async function processSubmission(job,{inbox,outbox,download=downloadSubmission,fork=forkReviewed,ai=review,validate=validateIsolated,render=renderEvidence}){
  const report={id:job.id,source:job.source,categories:job.categories||['other'],status:'validating',policyVersion:POLICY_VERSION,submittedAt:job.submittedAt};
@@ -31,6 +32,8 @@ export async function processSubmission(job,{inbox,outbox,download=downloadSubmi
  report.completedAt=new Date().toISOString();await outbox.put(path,report);return report;
 }
 export async function publishApproved(report,bytes,outbox){
+ const official=firstParty.find(game=>game.id===report.manifest.id);
+ if(official&&official.source.url!==report.source.url)throw Error('Game ID is reserved by an official repository.');
  const key=`games/${report.manifest.id}.json`;const current=await outbox.get(key);
  if(current&&current.source.fullName!==report.source.fullName)throw Error('Game ID belongs to a different repository.');
  await outbox.put(`packages/${report.hash}.json`,bytes);

@@ -1,13 +1,16 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {mkdtemp,rm} from 'node:fs/promises';import {tmpdir} from 'node:os';import {join} from 'node:path';
-import {declarations,publicationDecision,RULES,POLICY_VERSION} from '../policy.js';import {review} from '../review.js';import {Store} from '../storage.js';import {processSubmission} from '../pipeline.js';
+import {declarations,publicationDecision,RULES,POLICY_VERSION} from '../policy.js';import {review} from '../review.js';import {Store} from '../storage.js';import {processSubmission,publishApproved} from '../pipeline.js';
 const findings=result=>RULES.map(r=>({rule:r.id,result,reason:'Evidence reviewed.'}));
+test('community packages cannot reserve an official game ID',async()=>{
+ let wrote=false;await assert.rejects(publishApproved({manifest:{id:'chess'},source:{url:'https://github.com/outsider/chess'}},Buffer.from('{}'),{get:async()=>null,put:async()=>{wrote=true;}}),/reserved/);assert.equal(wrote,false);
+});
 test('AI output cannot bypass missing evidence or invent policy findings',()=>{assert.equal(publicationDecision({findings:findings('pass')},{complete:false}),'needs_review');assert.equal(publicationDecision({findings:findings('pass')},{complete:true}),'approved');assert.equal(publicationDecision({findings:findings('reject')},{complete:true}),'rejected');assert.throws(()=>publicationDecision({findings:[{rule:'SEC-01',result:'pass',reason:'ok'}]},{complete:true}));});
 test('declarations require affirmative current-policy acceptance',()=>{assert.throws(()=>declarations({policyVersion:'old'}));assert.throws(()=>declarations({policyVersion:POLICY_VERSION,rightsConfirmed:false}));});
 test('missing AI key and incomplete response never approve',async()=>{const pack={assets:{},manifest:{},engine:'',view:'',licenseText:''};assert.equal((await review(pack,{}, {key:''})).status,'needs_review');await assert.rejects(review(pack,{}, {key:'test',fetcher:async()=>({ok:true,json:async()=>({status:'incomplete'})})}),/incomplete/);});
-test('complete source and browser evidence can be accepted, but audio cannot be silently accepted',async()=>{
+test('initial screenshots cannot approve untested gameplay; audio cannot be silently accepted',async()=>{
  const response={status:'completed',id:'test',output:[{content:[{type:'output_text',text:JSON.stringify({summary:'Reviewed fixture.',findings:findings('pass')})}]}]};
  const options={key:'test',evidence:{passed:true,screens:[{role:'display',text:'Game display',image:'test'},{role:'controller',text:'Controls',image:'test'}]},fetcher:async()=>({ok:true,json:async()=>response})};
- const pack={assets:{},manifest:{},engine:'',view:'',licenseText:''};assert.equal((await review(pack,{},options)).status,'approved');
+ const pack={assets:{},manifest:{},engine:'',view:'',licenseText:''};const initial=await review(pack,{},options);assert.equal(initial.status,'needs_review');assert.equal(initial.coverage.complete,false);assert.equal(initial.findings.find(f=>f.rule==='QUALITY-01').result,'uncertain');
  pack.assets['voice.mp3']={type:'audio/mpeg',data:'test'};const result=await review(pack,{},options);assert.equal(result.status,'needs_review');assert.equal(result.findings.find(f=>f.rule==='SAFE-01').result,'uncertain');
 });
 test('approved exact artifact is published only after validation, fork and complete editorial evidence',async()=>{
