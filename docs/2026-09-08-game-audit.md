@@ -50,3 +50,13 @@ Chess was submitted using the actual public website form; Sketch through the pub
 These official repositories exercise the existing-Manaty-repository branch. Creating an external contributor's fork was not exercised against GitHub in this run. The pipeline's isolated failure/success tests cover the expected validation→fork→review→publication order; they are not a substitute for a real external-fork test.
 
 Authenticated test evidence must be tied to the exact hash and source commit, stored outside the author's intake, and identify whether the reviewer was an agent or a human. The independent editorial review remains authoritative and may reject despite passing gameplay tests.
+
+## Final publication result
+
+After attaching the independent agent test records in the private catalog and requesting an authenticated retry, **both submissions were approved** by a fresh editorial review. Every policy finding passed. Public reports explicitly identify the playthrough reviewer as `kind: agent`; no human approval was fabricated. The original reports were archived by the retry mechanism.
+
+Both public catalog APIs now list Chess and Sketch 1.0.1 as `reviewed`, with their receipt IDs. The catalog package download, GitHub release asset and deployed game host match the SHA-256 values above. The live storefront displays both games and their play links load successfully. A submission with obsolete policy acceptance returned HTTP 400; the duplicate Sketch submission retained its receipt.
+
+The public play service now has a passing GitHub CI workflow for its catalog tests. Game test sessions were ended and disconnected; the health check subsequently reported zero connected players and zero active rooms.
+
+Publication does not remove the quality limitations above. An external contributor fork still needs a separate real-world trial; the two official Manaty repositories intentionally reuse their existing repositories.
