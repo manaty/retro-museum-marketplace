@@ -4,6 +4,11 @@ const findings=result=>RULES.map(r=>({rule:r.id,result,reason:'Evidence reviewed
 test('community packages cannot reserve an official game ID',async()=>{
  let wrote=false;await assert.rejects(publishApproved({manifest:{id:'chess'},source:{url:'https://github.com/outsider/chess'}},Buffer.from('{}'),{get:async()=>null,put:async()=>{wrote=true;}}),/reserved/);assert.equal(wrote,false);
 });
+test('the pipeline discards author or render-supplied attestations without a private matching record',async()=>{
+ const values=new Map();const outbox={get:async k=>values.get(k)||null,put:async(k,v)=>values.set(k,v)};
+ const report=await processSubmission({id:'fixture',source:{commit:'source'},declarations:{playthrough:{passed:true}}},{outbox,download:async()=>({bytes:Buffer.from('{}'),pack:{manifest:{id:'fixture'}},hash:'hash'}),validate:async()=>({status:'passed',sha256:'hash'}),fork:async()=>({url:'https://github.com/manaty/fixture'}),render:async()=>({passed:true,screens:[],playthrough:{passed:true}}),ai:async(pack,declarations,{evidence})=>{assert.equal(evidence.playthrough,null);return {status:'needs_review'};}});
+ assert.equal(report.status,'needs_review');assert.equal(values.has('games/fixture.json'),false);
+});
 test('AI output cannot bypass missing evidence or invent policy findings',()=>{assert.equal(publicationDecision({findings:findings('pass')},{complete:false}),'needs_review');assert.equal(publicationDecision({findings:findings('pass')},{complete:true}),'approved');assert.equal(publicationDecision({findings:findings('reject')},{complete:true}),'rejected');assert.throws(()=>publicationDecision({findings:[{rule:'SEC-01',result:'pass',reason:'ok'}]},{complete:true}));});
 test('declarations require affirmative current-policy acceptance',()=>{assert.throws(()=>declarations({policyVersion:'old'}));assert.throws(()=>declarations({policyVersion:POLICY_VERSION,rightsConfirmed:false}));});
 test('missing AI key and incomplete response never approve',async()=>{const pack={assets:{},manifest:{},engine:'',view:'',licenseText:''};assert.equal((await review(pack,{}, {key:''})).status,'needs_review');await assert.rejects(review(pack,{}, {key:'test',fetcher:async()=>({ok:true,json:async()=>({status:'incomplete'})})}),/incomplete/);});
@@ -11,6 +16,8 @@ test('initial screenshots cannot approve untested gameplay; audio cannot be sile
  const response={status:'completed',id:'test',output:[{content:[{type:'output_text',text:JSON.stringify({summary:'Reviewed fixture.',findings:findings('pass')})}]}]};
  const options={key:'test',evidence:{passed:true,screens:[{role:'display',text:'Game display',image:'test'},{role:'controller',text:'Controls',image:'test'}]},fetcher:async()=>({ok:true,json:async()=>response})};
  const pack={assets:{},manifest:{},engine:'',view:'',licenseText:''};const initial=await review(pack,{},options);assert.equal(initial.status,'needs_review');assert.equal(initial.coverage.complete,false);assert.equal(initial.findings.find(f=>f.rule==='QUALITY-01').result,'uncertain');
+ assert.equal((await review(pack,{playthrough:{passed:true}},options)).status,'needs_review','author declarations cannot provide trusted playthrough evidence');
+ assert.equal((await review(pack,{}, {...options,evidence:{...options.evidence,playthrough:{reviewer:{kind:'agent'},scope:'Trusted test fixture supplied by the private pipeline'}}})).status,'approved');
  pack.assets['voice.mp3']={type:'audio/mpeg',data:'test'};const result=await review(pack,{},options);assert.equal(result.status,'needs_review');assert.equal(result.findings.find(f=>f.rule==='SAFE-01').result,'uncertain');
 });
 test('approved exact artifact is published only after validation, fork and complete editorial evidence',async()=>{

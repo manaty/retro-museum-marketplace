@@ -4,6 +4,7 @@ import {downloadSubmission,forkReviewed} from './github.js';import {review} from
 import {repository} from '@manaty/retro-museum-sdk/manifest';
 import {renderEvidence} from './render.js';
 import firstParty from './first-party.json' with {type:'json'};
+import {verifiedPlaythrough} from './playthrough.js';
 const require=createRequire(import.meta.url);const {validateIsolated}=await import(pathToFileURL(resolve(require.resolve('@manaty/retro-museum-sdk'),'../validate.js')).href);
 export async function processSubmission(job,{inbox,outbox,download=downloadSubmission,fork=forkReviewed,ai=review,validate=validateIsolated,render=renderEvidence}){
  const report={id:job.id,source:job.source,categories:job.categories||['other'],status:'validating',policyVersion:POLICY_VERSION,submittedAt:job.submittedAt};
@@ -19,7 +20,8 @@ export async function processSubmission(job,{inbox,outbox,download=downloadSubmi
    report.status='forking';await outbox.put(path,report);report.fork=await fork(job.source);
    report.status='reviewing';await outbox.put(path,report);
    const evidence=await render(join(dir,'game.rmg.json'));
-   report.browser={passed:evidence.passed,reason:evidence.reason||null,failures:evidence.failures||[],screens:(evidence.screens||[]).map(s=>s.role)};
+   evidence.playthrough=verifiedPlaythrough(await outbox.get('playthroughs/'+hash+'.json'),{hash,source:job.source});
+   report.browser={passed:evidence.passed,reason:evidence.reason||null,failures:evidence.failures||[],screens:(evidence.screens||[]).map(s=>s.role),playthrough:evidence.playthrough};
    report.editorial=await ai(pack,job.declarations,{evidence});report.status=report.editorial.status;
    if(report.status==='approved'){
     // AI approval is never sufficient if coverage is incomplete.

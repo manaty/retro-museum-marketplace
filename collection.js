@@ -1,3 +1,4 @@
+import {catalogEntries} from "./catalog-entries.js";
 import {createHash,randomInt} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {BUILTIN_QUIZZES} from '@manaty/game-quizz/builtins';
@@ -67,8 +68,8 @@ export function collectionRoutes({inbox,outbox,queue,firstParty,playOrigin}){
  const send=(res,status,value)=>{res.writeHead(status,{'Content-Type':'application/json','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(JSON.stringify(value));};
  return async(req,res,path)=>{
   if(req.method==='GET'&&path==='/api/marketplace'){
-   const reviewed=(await Promise.all((await outbox.list('games/')).map(k=>outbox.get(k)))).filter(g=>g&&!g.withdrawn);
-   send(res,200,{schemaVersion:2,categories:CATEGORIES,games:[...firstParty,...reviewed.filter(g=>!firstParty.some(p=>p.id===g.id)).map(g=>({...g,playUrl:playOrigin+'/g/'+g.id}))].map(gameEntry),packs:await contentPacks(outbox)});return true;
+   const reviewed=(await Promise.all((await outbox.list('games/')).map(k=>outbox.get(k)))).filter(g=>g);
+   send(res,200,{schemaVersion:2,categories:CATEGORIES,games:catalogEntries(firstParty,reviewed.map(g=>({...g,catalogType:'reviewed',playUrl:playOrigin+'/g/'+g.id}))).map(gameEntry),packs:await contentPacks(outbox)});return true;
   }
   if(req.method==='POST'&&path==='/api/selections'){
    try{
