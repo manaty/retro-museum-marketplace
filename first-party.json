@@ -618,7 +618,7 @@
     "manifest": {
       "schemaVersion": 1,
       "id": "chess",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "title": {
         "en": "Chess · Blitz duel",
         "fr": "Échecs · Duel blitz",
@@ -660,12 +660,13 @@
           ],
           "default": 5
         }
-      }
+      },
+      "autoStartWhenFull": true
     },
-    "sha256": "a5a87c5c16b3f39f8db38ceeb965b7d0ab947264d9e5caee07c931d88342c0d1",
+    "sha256": "32e9f5795d7cb8bee7912e714741647efe52109d6290ec9f09765123b0fcb84d",
     "source": {
       "url": "https://github.com/manaty/game-chess",
-      "commit": "0ddca11530c044bbe9faf0a2a0de67898a045036"
+      "commit": "b3e149d69b16a6cb007ca9bcecbe84ad8791680e"
     },
     "fork": {
       "url": "https://github.com/manaty/game-chess"
