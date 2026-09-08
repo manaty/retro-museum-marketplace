@@ -68,3 +68,11 @@ Quiz is the first content-pack adapter (`quiz-v1`). Its four starter questionnai
 `GET /api/selections/:id` provides a ready selection's play URL, immutable package download and content-only download for the museum's existing private questionnaire import. An SDK-compatible host can run the `.rmg.json` package with `retro-museum-host --package FILE`. The content-only `.quiz.json` works with Quiz already installed in the museum. No new Android APK is required for that import.
 
 Selections are deterministic by engine version and selected pack hashes, so duplicate requests reuse the same preparation. New preparations are capped at 50 per UTC day. Approved content is not sent through AI again just to combine it. Withdrawing a pack removes dependent selections from new discovery; existing running rooms retain their pinned versions. The schema-1 `/api/catalog` keeps prepared entries and legacy questionnaire activities for host compatibility, while the storefront lists each game only once.
+
+## Family difficulty and large banks (0.4.0)
+
+Banks accept up to 1,000 questions with a strict total of 10,000,000 UTF-8 bytes (including encoded images and submission metadata). Images retain the 100,000 decoded-byte limit. New submissions require difficulty 1–4 per question; the AI checks the level as well as the answer. Old content without difficulty keeps its hash and is marked unclassified.
+
+Preparation chooses a level range or percentage mix and 1–100 questions for the playable package; the separate museum content download retains the full selected bank. Exact integer quotas use largest remainder rounding and fail on a shortage instead of borrowing from another level. A prepared percentage mix pins its question count so changing the host settings cannot silently distort the proportions.
+
+Review checkpoints after each batch of 20 questions. A worker processes up to four batches per invocation and returns a retryable response when more remain. Cloud Tasks resumes it (maximum 20 attempts within two hours), retaining completed question assessments. An incomplete review never publishes a bank. For banks larger than 100 questions the full content is validated and reviewed, while technical execution checks use a representative fixed-engine package; users prepare a playable selection separately.

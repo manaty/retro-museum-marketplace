@@ -327,7 +327,7 @@
     "manifest": {
       "schemaVersion": 1,
       "id": "quizz",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "title": {
         "en": "The Million Quiz",
         "fr": "Le Quiz Million",
@@ -418,13 +418,35 @@
             "authored"
           ],
           "default": "random"
+        },
+        "difficultyMin": {
+          "label": {
+            "en": "Minimum level (1 primary – 4 advanced)",
+            "fr": "Niveau minimum",
+            "tl": "Pinakamababang antas"
+          },
+          "type": "integer",
+          "min": 1,
+          "max": 4,
+          "default": 1
+        },
+        "difficultyMax": {
+          "label": {
+            "en": "Maximum level (1 primary – 4 advanced)",
+            "fr": "Niveau maximum",
+            "tl": "Pinakamataas na antas"
+          },
+          "type": "integer",
+          "min": 1,
+          "max": 4,
+          "default": 4
         }
       }
     },
-    "sha256": "53c8b58b97a48b44740698d66b22db52fe163cac4a04dd549e5e7f63cb74d884",
+    "sha256": "e458c836c8dd80fee14e042439baf11e845597c159acfb2dd4c5b1d32f4273ed",
     "source": {
       "url": "https://github.com/manaty/game-quizz",
-      "commit": "959396cd66ca8a7b45f7b3eac546059227bda4c4"
+      "commit": "86acb54211376871d082abf21b6169558fe67ab0"
     },
     "fork": {
       "url": "https://github.com/manaty/game-quizz"

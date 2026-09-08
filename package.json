@@ -1,6 +1,6 @@
 {
   "name": "@manaty/retro-museum-marketplace",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
   "license": "MIT",
@@ -14,7 +14,7 @@
   "dependencies": {
     "@google-cloud/storage": "8.0.1",
     "@google-cloud/tasks": "7.0.0",
-    "@manaty/game-quizz": "https://github.com/manaty/game-quizz/archive/70d19b66e68ec0ce43874e388e94f42460675f0d.tar.gz",
+    "@manaty/game-quizz": "https://github.com/manaty/game-quizz/archive/86acb54211376871d082abf21b6169558fe67ab0.tar.gz",
     "@manaty/retro-museum-sdk": "https://github.com/manaty/retro-museum-sdk/archive/da1ee1a226de00e2f4f2a5deb4b7158831d5ac22.tar.gz",
     "playwright": "1.59.1"
   }
