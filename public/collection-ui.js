@@ -1,6 +1,6 @@
 (() => {
  const query=s=>document.querySelector(s),make=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
- const title=x=>typeof x==='string'?x:x?.en||x?.fr||'';
+ const title=x=>typeof x==='string'?x:x?.[window.MuseumI18n.language]||x?.en||x?.fr||'';
  let data,category='all',selectedGame=null,selected=new Set(),generation=0;
  const href=(label,url,download=false)=>{const a=make('a',label,'button');a.href=url;if(download)a.download='retro-museum-selection.rmg.json';else{a.target='_blank';a.rel='noopener';}return a;};
  function filters(){const area=query('#collection-filters');area.replaceChildren();for(const c of [{id:'all',title:'All games'},...data.categories]){const button=make('button',title(c.title),'category-button');button.type='button';button.dataset.category=c.id;button.setAttribute('aria-pressed',String(category===c.id));button.onclick=()=>{category=c.id;filters();games();};area.append(button);}}
@@ -34,5 +34,6 @@
    status.replaceChildren(make('span','Still preparing. You can retry this same selection or '),href('Check its status',receipt.report));
   }catch(e){if(own===generation)status.textContent=e.message;}finally{if(own===generation)button.disabled=false;}
  };
+ document.addEventListener('museum-language-change',()=>{if(data){filters();games();if(selectedGame){query('#packs-title').textContent=title(selectedGame.manifest.title)+' · content packs';for(const label of query('#packs-list').children){const p=data.packs.find(p=>p.id===label.querySelector('input').value);if(p)label.querySelector('strong').textContent=title(p.title);}}}});
  fetch('/api/marketplace').then(async r=>{if(!r.ok)throw Error('Collection unavailable.');data=await r.json();filters();games();}).catch(e=>query('#games').textContent=e.message);
 })();

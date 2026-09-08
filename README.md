@@ -76,3 +76,8 @@ Banks accept up to 1,000 questions with a strict total of 10,000,000 UTF-8 bytes
 Preparation chooses a level range or percentage mix and 1–100 questions for the playable package; the separate museum content download retains the full selected bank. Exact integer quotas use largest remainder rounding and fail on a shortage instead of borrowing from another level. A prepared percentage mix pins its question count so changing the host settings cannot silently distort the proportions.
 
 Review checkpoints after each batch of 20 questions. A worker processes up to four batches per invocation and returns a retryable response when more remain. Cloud Tasks resumes it (maximum 20 attempts within two hours), retaining completed question assessments. An incomplete review never publishes a bank. For banks larger than 100 questions the full content is validated and reviewed, while technical execution checks use a representative fixed-engine package; users prepare a playable selection separately.
+
+## Website languages
+
+The storefront and quiz studio offer English (default), French and Tagalog. The language selector remembers the choice locally; ?lang=fr and ?lang=tl select a language for a shared link. Interface changes preserve form values and selected content packs. Author-provided content uses its available translations; original technical review evidence is not machine-translated in the browser.
+
