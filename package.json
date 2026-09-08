@@ -15,7 +15,7 @@
     "@google-cloud/storage": "8.0.1",
     "@google-cloud/tasks": "7.0.0",
     "@manaty/game-quizz": "https://github.com/manaty/game-quizz/archive/dd6c058631c96e6c4525b7802caaf713049dc981.tar.gz",
-    "@manaty/retro-museum-sdk": "https://github.com/manaty/retro-museum-sdk/archive/11ff30d8e0931d16407f0cf5b06f7bff9ec22850.tar.gz",
+    "@manaty/retro-museum-sdk": "https://github.com/manaty/retro-museum-sdk/archive/ae5e0ae824ae005945732e88a7ac29bf74cba9a3.tar.gz",
     "playwright": "1.59.1"
   }
 }
