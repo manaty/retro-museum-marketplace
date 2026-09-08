@@ -327,7 +327,7 @@
     "manifest": {
       "schemaVersion": 1,
       "id": "quizz",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "title": {
         "en": "The Million Quiz",
         "fr": "Le Quiz Million",
@@ -443,10 +443,10 @@
         }
       }
     },
-    "sha256": "ac4b82fa2c825c560f67d8c152ee6bbb550e476e428758eccbca88ca7d4010cb",
+    "sha256": "19cc5b03f1f820d60b0fef5e723e80ac9a2f64c103753356af1be1f73971faf6",
     "source": {
       "url": "https://github.com/manaty/game-quizz",
-      "commit": "b73519163cda107d9c8b3cf9843471319747c6fd"
+      "commit": "a360ac2890a31595160efc045c7488228795424f"
     },
     "fork": {
       "url": "https://github.com/manaty/game-quizz"
