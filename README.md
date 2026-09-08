@@ -46,3 +46,13 @@ The initial intake is capped at ten new immutable source commits per UTC day, en
 An authenticated operator may rerun a completed report by posting `{id,retryReason}` to the private reviewer. A substantive reason is required and the original report is archived before rechecking the same immutable commit. Normal duplicate task delivery does not repeat completed work. This override is not exposed by the public submission form.
 
 Submitter declarations are private intake data. Reports expose repository, commit, package metadata and review findings, not API credentials or player data. See POLICY.md for appeals and content reports.
+
+## Quiz questionnaires
+
+Authors copy the [AI prompt](https://retro-museum.net/quiz-prompt.txt), append their topic and audience, and ask an assistant to generate and submit JSON. No application repository is required. Assistants with HTTP access use `POST https://retro-museum.net/api/quizzes/submissions`; otherwise the author uploads the JSON at `/quizzes`.
+
+`GET /api/quizzes/schema` describes the exact limits and publication declarations. Intake permits 1–100 questions, four choices and one correct answer, and optional PNG/JPEG images up to 100,000 bytes and 2048 pixels per side. The public API has no secret token. Atomic storage caps new quiz reviews at 20 per UTC day and deduplicates repeated submissions. A receipt links to `/api/reports/:id`.
+
+The private reviewer checks every question and image in bounded batches, including correctness, ambiguity, translations, audience and the content policy. Incomplete or uncertain reviews remain unpublished; authors may correct and resubmit them. AI review is not independent source verification. Approved data is packaged with the fixed, technically validated Quiz engine, never author-supplied executable code. `/api/quizzes` lists downloadable built-in and approved questionnaires; `/api/catalog` also exposes approved quiz activities to the online host. The existing repository review-decision CLI is not a quiz approval tool.
+
+The deployed pipeline approved and published the original ten-question fruit starter on 2026-09-08: [public report](https://retro-museum.net/api/reports/158dabd191488afa9e35c96c51232a4e).

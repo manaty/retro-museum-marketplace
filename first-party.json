@@ -321,5 +321,117 @@
     "publisher": "Manaty",
     "playUrl": "https://retro-museum-games-482805962191.asia-southeast1.run.app/g/zx80",
     "screenshot": "/screens/zx80.png"
+  },
+  {
+    "id": "quizz",
+    "manifest": {
+      "schemaVersion": 1,
+      "id": "quizz",
+      "version": "1.0.0",
+      "title": {
+        "en": "The Million Quiz",
+        "fr": "Le Quiz Million",
+        "tl": "Milyong Quiz"
+      },
+      "description": {
+        "en": "A shared quiz show. Flags, fruit, capitals and European monarchs. Choose the mode, question count and timer.",
+        "fr": "Un quiz collectif : drapeaux, fruits, capitales et souverains européens. Mode, nombre de questions et durée au choix.",
+        "tl": "Quiz para sa lahat: watawat, prutas, kabisera at mga monarka. Piliin ang mode, dami ng tanong at oras."
+      },
+      "author": "Manaty",
+      "license": "MIT",
+      "languages": [
+        "en",
+        "fr",
+        "tl"
+      ],
+      "players": {
+        "min": 1,
+        "max": null
+      },
+      "durationMinutes": 120,
+      "runtime": "quickjs-v1",
+      "entry": "dist/game.rmg.json",
+      "permissions": [],
+      "options": {
+        "quizId": {
+          "label": {
+            "en": "Questionnaire",
+            "fr": "Questionnaire",
+            "tl": "Mga tanong"
+          },
+          "values": [
+            "flags",
+            "fruits",
+            "capitals",
+            "kings"
+          ],
+          "default": "flags"
+        },
+        "mode": {
+          "label": {
+            "en": "Game mode",
+            "fr": "Mode de jeu",
+            "tl": "Mode ng laro"
+          },
+          "values": [
+            "ranking",
+            "elimination",
+            "cooperative"
+          ],
+          "default": "ranking"
+        },
+        "questionCount": {
+          "label": {
+            "en": "Questions to play",
+            "fr": "Questions à jouer",
+            "tl": "Dami ng tanong"
+          },
+          "type": "integer",
+          "min": 1,
+          "max": 100,
+          "default": 10
+        },
+        "seconds": {
+          "label": {
+            "en": "Seconds per question",
+            "fr": "Secondes par question",
+            "tl": "Segundo bawat tanong"
+          },
+          "values": [
+            15,
+            30,
+            45,
+            60,
+            90
+          ],
+          "default": 30
+        },
+        "order": {
+          "label": {
+            "en": "Question order",
+            "fr": "Ordre des questions",
+            "tl": "Ayos ng tanong"
+          },
+          "values": [
+            "random",
+            "authored"
+          ],
+          "default": "random"
+        }
+      }
+    },
+    "sha256": "53c8b58b97a48b44740698d66b22db52fe163cac4a04dd549e5e7f63cb74d884",
+    "source": {
+      "url": "https://github.com/manaty/game-quizz",
+      "commit": "959396cd66ca8a7b45f7b3eac546059227bda4c4"
+    },
+    "fork": {
+      "url": "https://github.com/manaty/game-quizz"
+    },
+    "catalogType": "publisher_preview",
+    "publisher": "Manaty",
+    "playUrl": "https://play.retro-museum.net/g/quizz",
+    "screenshot": "/screens/quizz.png"
   }
 ]

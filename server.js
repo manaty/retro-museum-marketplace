@@ -1,19 +1,22 @@
 import http from 'node:http';import {readFile} from 'node:fs/promises';import {randomBytes,createHash} from 'node:crypto';
 import {CloudTasksClient} from '@google-cloud/tasks';
+import {quizRoutes,processQuiz} from './quizzes.js';
 import {Store} from './storage.js';import {declarations,POLICY_VERSION,RULES} from './policy.js';import {resolveSubmission} from './github.js';import {processSubmission} from './pipeline.js';
 const inbox=new Store(process.env.INBOX_BUCKET,'.local/inbox'),outbox=new Store(process.env.CATALOG_BUCKET,'.local/catalog');
 const firstParty=JSON.parse(await readFile(new URL('./first-party.json',import.meta.url),'utf8'));
 const playOrigin=new URL(process.env.PLAY_ORIGIN||'https://retro-museum-games-482805962191.asia-southeast1.run.app').origin;
 if(process.env.PLAY_ORIGIN){const origin=new URL(process.env.PLAY_ORIGIN);if(origin.protocol!=='https:')throw Error('PLAY_ORIGIN must use HTTPS');for(const game of firstParty)game.playUrl=origin.origin+'/g/'+game.id;}
 const role=process.env.SERVICE_ROLE||'local';const tasks=process.env.TASK_QUEUE?new CloudTasksClient():null;
+const processJob=(job,stores)=>job.kind==='quiz'?processQuiz(job,stores):processSubmission(job,stores);
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const send=(res,status,value)=>{res.writeHead(status,{'Content-Type':'application/json','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(JSON.stringify(value));};
 async function body(req){let bytes=0,text='';for await(const chunk of req){bytes+=chunk.length;if(bytes>18000)throw Error('Request exceeds 18 KB.');text+=chunk;}return JSON.parse(text||'{}');}
-async function queue(id){if(tasks){await tasks.createTask({parent:process.env.TASK_QUEUE,task:{name:process.env.TASK_QUEUE+'/tasks/review-'+id,httpRequest:{httpMethod:'POST',url:process.env.REVIEWER_URL+'/process',headers:{'Content-Type':'application/json'},body:Buffer.from(JSON.stringify({id})).toString('base64'),oidcToken:{serviceAccountEmail:process.env.TASK_CALLER,audience:process.env.REVIEWER_URL}},dispatchDeadline:{seconds:300}}});}else if(role==='local'){setImmediate(async()=>{try{await processSubmission(await inbox.get(`jobs/${id}.json`),{inbox,outbox});}catch(e){console.error('Review failed:',e.message);}});}else throw Error('Review queue is not configured.');}
+async function queue(id){if(tasks){try{await tasks.createTask({parent:process.env.TASK_QUEUE,task:{name:process.env.TASK_QUEUE+'/tasks/review-'+id,httpRequest:{httpMethod:'POST',url:process.env.REVIEWER_URL+'/process',headers:{'Content-Type':'application/json'},body:Buffer.from(JSON.stringify({id})).toString('base64'),oidcToken:{serviceAccountEmail:process.env.TASK_CALLER,audience:process.env.REVIEWER_URL}},dispatchDeadline:{seconds:300}}});}catch(e){if(e.code!==6)throw e;}}else if(role==='local'){setImmediate(async()=>{try{await processJob(await inbox.get(`jobs/${id}.json`),{inbox,outbox});}catch(e){console.error('Review failed:',e.message);}});}else throw Error('Review queue is not configured.');}
+const handleQuizzes=quizRoutes({inbox,outbox,queue});
 export const server=http.createServer(async(req,res)=>{
  try{
   const url=new URL(req.url,'http://localhost'),path=url.pathname;
-  if(path==='/health'){send(res,200,{ok:true,version:'0.1.0',role});return;}
+  if(path==='/health'){send(res,200,{ok:true,version:'0.2.0',role});return;}
   if(role==='reviewer'){
    // Cloud Run IAM requires a Google OIDC identity before this private service is reached.
    if(req.method!=='POST'||path!=='/process'){send(res,404,{error:'Not found'});return;}
@@ -23,10 +26,12 @@ export const server=http.createServer(async(req,res)=>{
     if(typeof retryReason!=='string'||retryReason.trim().length<10){send(res,200,{status:prior.status});return;}
     await outbox.put(`report-history/${id}/${randomBytes(8).toString('hex')}.json`,{...prior,retryReason:retryReason.slice(0,1000),retriedAt:new Date().toISOString()},{create:true});
    }
-   const result=await processSubmission(job,{inbox,outbox});send(res,200,{status:result.status});return;
+   const result=await processJob(job,{inbox,outbox});send(res,200,{status:result.status});return;
   }
+  if(await handleQuizzes(req,res,path))return;
+  const quizFile={'/quizzes':'editor.html','/quiz-editor.js':'editor.js','/quiz-editor.css':'editor.css','/quiz-prompt.txt':'submit-prompt.txt'}[path];if(req.method==='GET'&&quizFile){res.writeHead(200,{'Content-Type':quizFile.endsWith('.html')?'text/html; charset=utf-8':quizFile.endsWith('.js')?'text/javascript; charset=utf-8':quizFile.endsWith('.css')?'text/css':'text/plain; charset=utf-8','Cache-Control':'no-cache','X-Content-Type-Options':'nosniff'});res.end(await readFile(new URL(import.meta.resolve('@manaty/game-quizz/public/'+quizFile))));return;}
   if(req.method==='GET'&&path==='/api/catalog'){
-   const keys=await outbox.list('games/');const games=(await Promise.all(keys.map(k=>outbox.get(k)))).filter(g=>g&&!g.withdrawn).map(g=>({...g,catalogType:'reviewed',playUrl:playOrigin+'/g/'+encodeURIComponent(g.id)}));send(res,200,{schemaVersion:1,policyVersion:POLICY_VERSION,games:[...firstParty,...games.filter(g=>!firstParty.some(p=>p.id===g.id))]});return;
+   const keys=await outbox.list('games/');const quizEntries=(await Promise.all((await outbox.list('quizzes/')).map(k=>outbox.get(k)))).filter(q=>q&&!q.withdrawn).map(q=>({...q,sha256:q.packageHash,source:{url:'https://retro-museum.net/api/quizzes/content/'+q.sha256},fork:{url:'https://github.com/manaty/game-quizz'}}));const games=[...(await Promise.all(keys.map(k=>outbox.get(k)))),...quizEntries].filter(g=>g&&!g.withdrawn).map(g=>({...g,catalogType:'reviewed',playUrl:playOrigin+'/g/'+encodeURIComponent(g.id)}));send(res,200,{schemaVersion:1,policyVersion:POLICY_VERSION,games:[...firstParty,...games.filter(g=>!firstParty.some(p=>p.id===g.id))]});return;
   }
   if(req.method==='GET'&&path==='/api/policy'){send(res,200,{version:POLICY_VERSION,rules:RULES});return;}
   if(req.method==='POST'&&path==='/api/submissions'){
@@ -50,7 +55,7 @@ export const server=http.createServer(async(req,res)=>{
    const bytes=await outbox.bytes(path.slice(1));res.writeHead(200,{'Content-Type':'application/json','Cache-Control':'public, max-age=31536000, immutable','Access-Control-Allow-Origin':'*','X-Content-Type-Options':'nosniff'});res.end(bytes);return;
   }
   if(req.method==='GET'&&(path==='/'||path==='/retro-museum')){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'self' https://nexlink-web-3vxjlkppba-as.a.run.app https://nexlink.manaty.net https://nexlink.app",'Referrer-Policy':'no-referrer'});res.end(await readFile(new URL('./public/index.html',import.meta.url)));return;}
-  if(req.method==='GET'&&/^\/screens\/(tanks|uno|kart|monopoly|werewolf|zx80)\.png$/.test(path)){res.writeHead(200,{'Content-Type':'image/png','Cache-Control':'public,max-age=3600','X-Content-Type-Options':'nosniff'});res.end(await readFile(new URL('./public'+path,import.meta.url)));return;}
+  if(req.method==='GET'&&/^\/screens\/(tanks|uno|kart|monopoly|werewolf|zx80|quizz)\.png$/.test(path)){res.writeHead(200,{'Content-Type':'image/png','Cache-Control':'public,max-age=3600','X-Content-Type-Options':'nosniff'});res.end(await readFile(new URL('./public'+path,import.meta.url)));return;}
   if(req.method==='GET'&&['/app.js','/style.css'].includes(path)){res.writeHead(200,{'Content-Type':path.endsWith('.js')?'text/javascript':'text/css','Cache-Control':'no-cache','X-Content-Type-Options':'nosniff'});res.end(await readFile(new URL('./public'+path,import.meta.url)));return;}
   send(res,404,{error:'Not found'});
  }catch(error){console.error('Request failed:',error.message);send(res,['ENOENT',404].includes(error.code)?404:400,{error:String(error.message).slice(0,500)});}
