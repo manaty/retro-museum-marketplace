@@ -5,7 +5,7 @@ import {repository} from '@manaty/retro-museum-sdk/manifest';
 import {renderEvidence} from './render.js';
 const require=createRequire(import.meta.url);const {validateIsolated}=await import(pathToFileURL(resolve(require.resolve('@manaty/retro-museum-sdk'),'../validate.js')).href);
 export async function processSubmission(job,{inbox,outbox,download=downloadSubmission,fork=forkReviewed,ai=review,validate=validateIsolated,render=renderEvidence}){
- const report={id:job.id,source:job.source,status:'validating',policyVersion:POLICY_VERSION,submittedAt:job.submittedAt};
+ const report={id:job.id,source:job.source,categories:job.categories||['other'],status:'validating',policyVersion:POLICY_VERSION,submittedAt:job.submittedAt};
  const path=`reports/${job.id}.json`;await outbox.put(path,report);
  let dir;
  try{
@@ -34,5 +34,5 @@ export async function publishApproved(report,bytes,outbox){
  const key=`games/${report.manifest.id}.json`;const current=await outbox.get(key);
  if(current&&current.source.fullName!==report.source.fullName)throw Error('Game ID belongs to a different repository.');
  await outbox.put(`packages/${report.hash}.json`,bytes);
- await outbox.put(key,{id:report.manifest.id,manifest:report.manifest,sha256:report.hash,source:report.source,fork:report.fork,reportId:report.id,policyVersion:report.policyVersion,publishedAt:new Date().toISOString()});
+ await outbox.put(key,{id:report.manifest.id,categories:report.categories||['other'],manifest:report.manifest,sha256:report.hash,source:report.source,fork:report.fork,reportId:report.id,policyVersion:report.policyVersion,publishedAt:new Date().toISOString()});
 }

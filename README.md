@@ -56,3 +56,15 @@ Authors copy the [AI prompt](https://retro-museum.net/quiz-prompt.txt), append t
 The private reviewer checks every question and image in bounded batches, including correctness, ambiguity, translations, audience and the content policy. Incomplete or uncertain reviews remain unpublished; authors may correct and resubmit them. AI review is not independent source verification. Approved data is packaged with the fixed, technically validated Quiz engine, never author-supplied executable code. `/api/quizzes` lists downloadable built-in and approved questionnaires; `/api/catalog` also exposes approved quiz activities to the online host. The existing repository review-decision CLI is not a quiz approval tool.
 
 The deployed pipeline approved and published the original ten-question fruit starter on 2026-09-08: [public report](https://retro-museum.net/api/reports/158dabd191488afa9e35c96c51232a4e).
+
+## Games, categories and content packs
+
+The storefront uses `GET /api/marketplace` (schema 2): `games` and `packs` are separate lists. Games have one to three controlled categories and a `content` requirement. New game submissions can include a `categories` array; old clients default to `other`. Category metadata is preserved in the review report and approved entry.
+
+Quiz is the first content-pack adapter (`quiz-v1`). Its four starter questionnaires and approved community questionnaires are packs, not separate storefront games. Quiz requires at least one selected pack. Other games currently include their original content; this release does not add downloadable Kart circuits or Werewolf scenarios.
+
+`POST /api/selections` takes `{gameId:"quizz",packIds:["builtin-flags","builtin-capitals"]}` and returns a tracking path. The public web only queues the request. The private worker resolves approved immutable content, checks compatibility and integrity, and prepares a technically validated game package containing only the selected question bank. The engine used for content packages contains no unselected starter questions. A selection accepts 1–10 different packs and at most 100 questions in total; game settings can use fewer questions.
+
+`GET /api/selections/:id` provides a ready selection's play URL, immutable package download and content-only download for the museum's existing private questionnaire import. An SDK-compatible host can run the `.rmg.json` package with `retro-museum-host --package FILE`. The content-only `.quiz.json` works with Quiz already installed in the museum. No new Android APK is required for that import.
+
+Selections are deterministic by engine version and selected pack hashes, so duplicate requests reuse the same preparation. New preparations are capped at 50 per UTC day. Approved content is not sent through AI again just to combine it. Withdrawing a pack removes dependent selections from new discovery; existing running rooms retain their pinned versions. The schema-1 `/api/catalog` keeps prepared entries and legacy questionnaire activities for host compatibility, while the storefront lists each game only once.
