@@ -533,5 +533,142 @@
       "board",
       "education"
     ]
+  },
+  {
+    "id": "sketch",
+    "manifest": {
+      "schemaVersion": 1,
+      "id": "sketch",
+      "version": "1.0.0",
+      "title": {
+        "en": "Sketch · Draw & guess",
+        "fr": "Sketch · Dessine et devine",
+        "tl": "Sketch · Iguhit at hulaan"
+      },
+      "description": {
+        "en": "Take turns drawing a secret word on your phone while everyone else guesses. 2–8 players.",
+        "fr": "Dessinez à tour de rôle un mot secret sur votre téléphone pendant que les autres devinent. 2 à 8 joueurs.",
+        "tl": "Halili kayong gumuhit ng lihim na salita sa telepono habang hulaan ng iba. 2–8 na manlalaro."
+      },
+      "author": "Manaty",
+      "license": "MIT",
+      "languages": [
+        "en",
+        "fr",
+        "tl"
+      ],
+      "players": {
+        "min": 2,
+        "max": 8
+      },
+      "durationMinutes": 30,
+      "introMs": 3000,
+      "runtime": "quickjs-v1",
+      "entry": "dist/game.rmg.json",
+      "permissions": [],
+      "activityKey": "sketch",
+      "options": {
+        "drawSeconds": {
+          "label": {
+            "en": "Drawing time",
+            "fr": "Temps de dessin",
+            "tl": "Oras ng pagguhit"
+          },
+          "values": [
+            60,
+            90,
+            120
+          ],
+          "default": 90
+        },
+        "rounds": {
+          "label": {
+            "en": "Rounds",
+            "fr": "Manches",
+            "tl": "Mga round"
+          },
+          "values": [
+            1,
+            2,
+            3
+          ],
+          "default": 2
+        }
+      }
+    },
+    "sha256": "cd99e0665767e2aa1435336e558b5376f857e2cd5bdc80555fce96e77bfac50d",
+    "source": {
+      "url": "https://github.com/manaty/game-sketch",
+      "commit": "f08cc0da3e54df35832789a6064f36554d693b12"
+    },
+    "fork": {
+      "url": "https://github.com/manaty/game-sketch"
+    },
+    "catalogType": "publisher_preview",
+    "publisher": "Manaty",
+    "playUrl": "https://retro-museum-games-482805962191.asia-southeast1.run.app/g/sketch",
+    "screenshot": "/screens/sketch.png"
+  },
+  {
+    "id": "chess",
+    "manifest": {
+      "schemaVersion": 1,
+      "id": "chess",
+      "version": "1.0.0",
+      "title": {
+        "en": "Chess · Blitz duel",
+        "fr": "Échecs · Duel blitz",
+        "tl": "Ahedres · Blitz duel"
+      },
+      "description": {
+        "en": "A two-player chess duel with blitz clocks on the shared screen. Full rules: castling, promotion and every draw.",
+        "fr": "Un duel d'échecs à deux avec horloges blitz sur l'écran partagé. Règles complètes : roque, promotion et toutes les nulles.",
+        "tl": "Duel na ahedres para sa dalawa na may blitz na orasan sa shared screen. Kumpletong patakaran."
+      },
+      "author": "Manaty",
+      "license": "MIT",
+      "languages": [
+        "en",
+        "fr",
+        "tl"
+      ],
+      "players": {
+        "min": 2,
+        "max": 2
+      },
+      "durationMinutes": 25,
+      "introMs": 3000,
+      "runtime": "quickjs-v1",
+      "entry": "dist/game.rmg.json",
+      "permissions": [],
+      "activityKey": "chess",
+      "options": {
+        "minutes": {
+          "label": {
+            "en": "Minutes per player",
+            "fr": "Minutes par joueur",
+            "tl": "Minuto bawat manlalaro"
+          },
+          "values": [
+            3,
+            5,
+            10
+          ],
+          "default": 5
+        }
+      }
+    },
+    "sha256": "ab5d8e0bfd9c3a82a96a1c3f6b208befa54af1bfb6d426c3112a0602958fd601",
+    "source": {
+      "url": "https://github.com/manaty/game-chess",
+      "commit": "cba389702de04099e8d9826fc829502ef9456596"
+    },
+    "fork": {
+      "url": "https://github.com/manaty/game-chess"
+    },
+    "catalogType": "publisher_preview",
+    "publisher": "Manaty",
+    "playUrl": "https://retro-museum-games-482805962191.asia-southeast1.run.app/g/chess",
+    "screenshot": "/screens/chess.png"
   }
 ]
