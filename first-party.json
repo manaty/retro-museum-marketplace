@@ -1058,7 +1058,7 @@
     "manifest": {
       "schemaVersion": 1,
       "id": "tag",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "title": {
         "en": "Tag · Catch me!",
         "fr": "Tag · Attrape-moi !",
@@ -1144,17 +1144,17 @@
       },
       "cover": "cover.png"
     },
-    "sha256": "7082670bf42bbdca8328a21912e3af2bb5257376e3e091111c45716bfd31ef34",
+    "sha256": "5b561cd9b3a01fa4e881cdfc9cda94a24aefd81af1cd34f0792023dc2d34ce44",
     "source": {
       "owner": "manaty",
       "repo": "game-tag",
       "fullName": "manaty/game-tag",
       "url": "https://github.com/manaty/game-tag",
-      "commit": "b524c46107e889281b0af7a470ff28ab5c60ab37"
+      "commit": "e9d09c740f988700b6c04b26ddf3f8bde1d2fa16"
     },
     "fork": {
       "url": "https://github.com/manaty/game-tag",
-      "commit": "b524c46107e889281b0af7a470ff28ab5c60ab37",
+      "commit": "e9d09c740f988700b6c04b26ddf3f8bde1d2fa16",
       "official": true
     },
     "catalogType": "publisher_preview",
