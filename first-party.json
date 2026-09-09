@@ -1048,5 +1048,118 @@
     "playUrl": "https://play.retro-museum.net/g/family-islands",
     "publisher": "Manaty",
     "screenshot": "/screens/family-islands.png"
+  },
+  {
+    "id": "tag",
+    "categories": [
+      "action",
+      "social"
+    ],
+    "manifest": {
+      "schemaVersion": 1,
+      "id": "tag",
+      "version": "1.0.1",
+      "title": {
+        "en": "Tag · Catch me!",
+        "fr": "Tag · Attrape-moi !",
+        "tl": "Tag · Habulin mo ako!"
+      },
+      "description": {
+        "en": "Chase your friends across playful platform arenas. Pass on the tag before time runs out! Tanks-style phone joystick, spring pads and double jumps.",
+        "fr": "Poursuis tes amis entre les plateformes. Passe le rôle du chat avant la fin du chrono ! Joystick tactile, trampolines et doubles sauts.",
+        "tl": "Habulin ang mga kaibigan sa mga plataporma. Ipasa ang taya bago maubos ang oras! Joystick sa telepono, trampolin at dobleng talon."
+      },
+      "author": "Manaty",
+      "license": "MIT",
+      "languages": [
+        "en",
+        "fr",
+        "tl"
+      ],
+      "players": {
+        "min": 2,
+        "max": 8
+      },
+      "durationMinutes": 15,
+      "introMs": 3000,
+      "runtime": "quickjs-v1",
+      "entry": "dist/game.rmg.json",
+      "permissions": [],
+      "autoStartWhenFull": false,
+      "activityKey": "tag",
+      "options": {
+        "roundSeconds": {
+          "label": {
+            "en": "Seconds per round",
+            "fr": "Secondes par manche",
+            "tl": "Segundo bawat round"
+          },
+          "values": [
+            30,
+            45,
+            60
+          ],
+          "default": 45
+        },
+        "rounds": {
+          "label": {
+            "en": "Rounds",
+            "fr": "Manches",
+            "tl": "Mga round"
+          },
+          "values": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "default": 5
+        },
+        "arena": {
+          "label": {
+            "en": "Arena (rotation / rooftops / garden / arcade)",
+            "fr": "Arène (rotation / toits / jardin / arcade)",
+            "tl": "Arena (rotation / bubong / hardin / arcade)"
+          },
+          "values": [
+            "rotation",
+            "rooftops",
+            "garden",
+            "arcade"
+          ],
+          "default": "rotation"
+        },
+        "doubleJump": {
+          "label": {
+            "en": "Double jump",
+            "fr": "Double saut",
+            "tl": "Dobleng talon"
+          },
+          "values": [
+            true,
+            false
+          ],
+          "default": true
+        }
+      },
+      "cover": "cover.png"
+    },
+    "sha256": "7082670bf42bbdca8328a21912e3af2bb5257376e3e091111c45716bfd31ef34",
+    "source": {
+      "owner": "manaty",
+      "repo": "game-tag",
+      "fullName": "manaty/game-tag",
+      "url": "https://github.com/manaty/game-tag",
+      "commit": "b524c46107e889281b0af7a470ff28ab5c60ab37"
+    },
+    "fork": {
+      "url": "https://github.com/manaty/game-tag",
+      "commit": "b524c46107e889281b0af7a470ff28ab5c60ab37",
+      "official": true
+    },
+    "catalogType": "publisher_preview",
+    "playUrl": "https://play.retro-museum.net/g/tag",
+    "publisher": "Manaty",
+    "screenshot": "/screens/tag.png"
   }
 ]
