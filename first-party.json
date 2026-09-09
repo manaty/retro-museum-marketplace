@@ -1468,17 +1468,17 @@
       },
       "cover": "cover.png"
     },
-    "sha256": "5415ae0ea70121ad6ea80115467356a41a8acdaf59ad6bc6e92a139c4392f18f",
+    "sha256": "a6bec543c102c912058e56429301ce1fc49fc9f92ef85cd22a1d82ba864acb36",
     "source": {
       "owner": "manaty",
       "repo": "game-serpents",
       "fullName": "manaty/game-serpents",
       "url": "https://github.com/manaty/game-serpents",
-      "commit": "7998ff1426813c58fbb61fec6c6787e33fb0d987"
+      "commit": "142e03b2dc3a103587f713ea9c08e5ed1548fd30"
     },
     "fork": {
       "url": "https://github.com/manaty/game-serpents",
-      "commit": "7998ff1426813c58fbb61fec6c6787e33fb0d987",
+      "commit": "142e03b2dc3a103587f713ea9c08e5ed1548fd30",
       "official": true
     },
     "catalogType": "publisher_preview",
