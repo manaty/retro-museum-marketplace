@@ -1161,5 +1161,329 @@
     "playUrl": "https://play.retro-museum.net/g/tag",
     "publisher": "Manaty",
     "screenshot": "/screens/tag.png"
+  },
+  {
+    "id": "lightcycles",
+    "categories": [
+      "action",
+      "social"
+    ],
+    "manifest": {
+      "schemaVersion": 1,
+      "id": "lightcycles",
+      "version": "1.0.0",
+      "title": {
+        "en": "Light Cycles · Neon trails",
+        "fr": "Light Cycles · Pistes néon",
+        "tl": "Light Cycles · Neon na landas"
+      },
+      "description": {
+        "en": "Your light cycle never stops. Avoid every trail and wall. Last rider surviving earns a point. Highest score after all rounds wins.",
+        "fr": "Ta moto ne s’arrête jamais. Évite les murs et toutes les traînées. Le dernier pilote gagne un point. Le meilleur score remporte la partie.",
+        "tl": "Tuloy-tuloy ang motorsiklo. Iwasan ang mga pader at lahat ng landas. May puntos ang huling natitirang manlalaro. Pinakamaraming puntos ang panalo."
+      },
+      "author": "Manaty",
+      "license": "MIT",
+      "languages": [
+        "en",
+        "fr",
+        "tl"
+      ],
+      "players": {
+        "min": 2,
+        "max": 8
+      },
+      "durationMinutes": 15,
+      "introMs": 3000,
+      "runtime": "quickjs-v1",
+      "entry": "dist/game.rmg.json",
+      "permissions": [],
+      "autoStartWhenFull": false,
+      "activityKey": "lightcycles",
+      "options": {
+        "seconds": {
+          "label": {
+            "en": "Seconds per round",
+            "fr": "Secondes par manche",
+            "tl": "Segundo bawat round"
+          },
+          "values": [
+            30,
+            60,
+            90
+          ],
+          "default": 60
+        },
+        "rounds": {
+          "label": {
+            "en": "Rounds",
+            "fr": "Manches",
+            "tl": "Mga round"
+          },
+          "values": [
+            1,
+            3,
+            5
+          ],
+          "default": 3
+        },
+        "speed": {
+          "label": {
+            "en": "Speed",
+            "fr": "Vitesse",
+            "tl": "Bilis"
+          },
+          "values": [
+            6,
+            8,
+            10
+          ],
+          "default": 8
+        },
+        "arena": {
+          "label": {
+            "en": "Arena",
+            "fr": "Arène",
+            "tl": "Arena"
+          },
+          "values": [
+            "rotation",
+            "grid",
+            "pillars",
+            "gates"
+          ],
+          "default": "rotation"
+        }
+      },
+      "cover": "cover.png"
+    },
+    "sha256": "64ef7d59802f2510cc5612e1ae41f62babd16738d902ac016d6b08f732be9f59",
+    "source": {
+      "owner": "manaty",
+      "repo": "game-lightcycles",
+      "fullName": "manaty/game-lightcycles",
+      "url": "https://github.com/manaty/game-lightcycles",
+      "commit": "1cf3c3a2fcaaf7f9f81500e0dbfc8e87daf09a3e"
+    },
+    "fork": {
+      "url": "https://github.com/manaty/game-lightcycles",
+      "commit": "1cf3c3a2fcaaf7f9f81500e0dbfc8e87daf09a3e",
+      "official": true
+    },
+    "catalogType": "publisher_preview",
+    "playUrl": "https://play.retro-museum.net/g/lightcycles",
+    "publisher": "Manaty",
+    "screenshot": "/screens/lightcycles.png"
+  },
+  {
+    "id": "caterpillar",
+    "categories": [
+      "action",
+      "social"
+    ],
+    "manifest": {
+      "schemaVersion": 1,
+      "id": "caterpillar",
+      "version": "1.0.0",
+      "title": {
+        "en": "Caterpillar · Fruit parade",
+        "fr": "Caterpillar · La parade des fruits",
+        "tl": "Caterpillar · Parada ng prutas"
+      },
+      "description": {
+        "en": "Eat fruit to grow and score. Avoid bodies, walls and your own tail. Each collision costs a life. Collect the most points before time runs out.",
+        "fr": "Mange des fruits pour grandir et marquer. Évite les corps, les murs et ta queue. Chaque collision coûte une vie. Accumule le plus de points avant la fin.",
+        "tl": "Kumain ng prutas para lumaki at makapuntos. Iwasan ang mga katawan, pader at sariling buntot. Bawas-buhay ang banggaan. Pinakamaraming puntos ang panalo."
+      },
+      "author": "Manaty",
+      "license": "MIT",
+      "languages": [
+        "en",
+        "fr",
+        "tl"
+      ],
+      "players": {
+        "min": 1,
+        "max": 8
+      },
+      "durationMinutes": 15,
+      "introMs": 3000,
+      "runtime": "quickjs-v1",
+      "entry": "dist/game.rmg.json",
+      "permissions": [],
+      "autoStartWhenFull": false,
+      "activityKey": "caterpillar",
+      "options": {
+        "seconds": {
+          "label": {
+            "en": "Match seconds",
+            "fr": "Secondes de jeu",
+            "tl": "Segundo ng laro"
+          },
+          "values": [
+            60,
+            120,
+            180
+          ],
+          "default": 120
+        },
+        "speed": {
+          "label": {
+            "en": "Speed",
+            "fr": "Vitesse",
+            "tl": "Bilis"
+          },
+          "values": [
+            4,
+            6,
+            8
+          ],
+          "default": 6
+        },
+        "lives": {
+          "label": {
+            "en": "Lives",
+            "fr": "Vies",
+            "tl": "Buhay"
+          },
+          "values": [
+            3,
+            5,
+            9
+          ],
+          "default": 5
+        },
+        "arena": {
+          "label": {
+            "en": "Arena",
+            "fr": "Arène",
+            "tl": "Arena"
+          },
+          "values": [
+            "orchard",
+            "pond",
+            "hedges"
+          ],
+          "default": "orchard"
+        }
+      },
+      "cover": "cover.png"
+    },
+    "sha256": "7ab4033b089a8db6f8e406c8466ab82b32169be530fb9965edc11be55c864699",
+    "source": {
+      "owner": "manaty",
+      "repo": "game-caterpillar",
+      "fullName": "manaty/game-caterpillar",
+      "url": "https://github.com/manaty/game-caterpillar",
+      "commit": "b00e419ee9c755c4c1f02a875d5b67fbb833031b"
+    },
+    "fork": {
+      "url": "https://github.com/manaty/game-caterpillar",
+      "commit": "b00e419ee9c755c4c1f02a875d5b67fbb833031b",
+      "official": true
+    },
+    "catalogType": "publisher_preview",
+    "playUrl": "https://play.retro-museum.net/g/caterpillar",
+    "publisher": "Manaty",
+    "screenshot": "/screens/caterpillar.png"
+  },
+  {
+    "id": "serpents",
+    "categories": [
+      "action",
+      "social"
+    ],
+    "manifest": {
+      "schemaVersion": 1,
+      "id": "serpents",
+      "version": "1.0.0",
+      "title": {
+        "en": "Serpents · Endless gardens",
+        "fr": "Serpents · Jardins sans fin",
+        "tl": "Serpents · Walang-hanggang hardin"
+      },
+      "description": {
+        "en": "Grow by collecting glowing seeds. Avoid other serpents’ bodies. Boost spends length. You respawn after a collision. The largest human serpent at the end wins. The world wraps at every edge.",
+        "fr": "Grandis en mangeant les graines lumineuses. Évite le corps des autres serpents. Le turbo consomme de la longueur. Tu réapparais après une collision. Le plus grand serpent humain à la fin gagne. Tous les bords se rejoignent.",
+        "tl": "Lumaki sa pagkain ng kumikinang na buto. Iwasan ang katawan ng ibang ahas. Nakakabawas ng haba ang Bilis. Babalik ka matapos bumangga. Pinakamalaking ahas ng tao sa dulo ang panalo. Magkakadugtong ang lahat ng gilid."
+      },
+      "author": "Manaty",
+      "license": "MIT",
+      "languages": [
+        "en",
+        "fr",
+        "tl"
+      ],
+      "players": {
+        "min": 1,
+        "max": 8
+      },
+      "durationMinutes": 15,
+      "introMs": 3000,
+      "runtime": "quickjs-v1",
+      "entry": "dist/game.rmg.json",
+      "permissions": [],
+      "autoStartWhenFull": false,
+      "activityKey": "serpents",
+      "options": {
+        "seconds": {
+          "label": {
+            "en": "Match seconds",
+            "fr": "Secondes de jeu",
+            "tl": "Segundo ng laro"
+          },
+          "values": [
+            60,
+            120,
+            180
+          ],
+          "default": 120
+        },
+        "bots": {
+          "label": {
+            "en": "Automatic serpents",
+            "fr": "Serpents automatiques",
+            "tl": "Awtomatikong ahas"
+          },
+          "values": [
+            0,
+            2,
+            4
+          ],
+          "default": 2
+        },
+        "arena": {
+          "label": {
+            "en": "Arena",
+            "fr": "Arène",
+            "tl": "Arena"
+          },
+          "values": [
+            "garden",
+            "lagoon",
+            "twilight"
+          ],
+          "default": "garden"
+        }
+      },
+      "cover": "cover.png"
+    },
+    "sha256": "590569cc66efd6d6deae08b9723f5f3303374f2401da34df98a693779452f6db",
+    "source": {
+      "owner": "manaty",
+      "repo": "game-serpents",
+      "fullName": "manaty/game-serpents",
+      "url": "https://github.com/manaty/game-serpents",
+      "commit": "9a34cf3088ee2e5c4ea6e6d424c65a885bba1f52"
+    },
+    "fork": {
+      "url": "https://github.com/manaty/game-serpents",
+      "commit": "9a34cf3088ee2e5c4ea6e6d424c65a885bba1f52",
+      "official": true
+    },
+    "catalogType": "publisher_preview",
+    "playUrl": "https://play.retro-museum.net/g/serpents",
+    "publisher": "Manaty",
+    "screenshot": "/screens/serpents.png"
   }
 ]
