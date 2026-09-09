@@ -1396,16 +1396,16 @@
     "manifest": {
       "schemaVersion": 1,
       "id": "serpents",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "title": {
         "en": "Serpents · Endless gardens",
         "fr": "Serpents · Jardins sans fin",
         "tl": "Serpents · Walang-hanggang hardin"
       },
       "description": {
-        "en": "Grow by collecting glowing seeds. Avoid other serpents’ bodies. Boost spends length. You respawn after a collision. The largest human serpent at the end wins. The world wraps at every edge.",
-        "fr": "Grandis en mangeant les graines lumineuses. Évite le corps des autres serpents. Le turbo consomme de la longueur. Tu réapparais après une collision. Le plus grand serpent humain à la fin gagne. Tous les bords se rejoignent.",
-        "tl": "Lumaki sa pagkain ng kumikinang na buto. Iwasan ang katawan ng ibang ahas. Nakakabawas ng haba ang Bilis. Babalik ka matapos bumangga. Pinakamalaking ahas ng tao sa dulo ang panalo. Magkakadugtong ang lahat ng gilid."
+        "en": "Grow by collecting glowing seeds. Avoid every serpent’s body, including your own. Boost spends length. You respawn after a collision. The largest human serpent at the end wins. The world wraps at every edge.",
+        "fr": "Grandis en mangeant les graines lumineuses. Évite le corps des serpents, y compris le tien. Le turbo consomme de la longueur. Tu réapparais après une collision. Le plus grand serpent humain à la fin gagne. Tous les bords se rejoignent.",
+        "tl": "Lumaki sa pagkain ng kumikinang na buto. Iwasan ang katawan ng lahat ng ahas, pati ang sarili mo. Nakakabawas ng haba ang Bilis. Babalik ka matapos bumangga. Pinakamalaking ahas ng tao sa dulo ang panalo. Magkakadugtong ang lahat ng gilid."
       },
       "author": "Manaty",
       "license": "MIT",
@@ -1468,17 +1468,17 @@
       },
       "cover": "cover.png"
     },
-    "sha256": "a6bec543c102c912058e56429301ce1fc49fc9f92ef85cd22a1d82ba864acb36",
+    "sha256": "5c3313a3506242a25e54c356904822832d3038dfe9ccbfc8dfced6b0f6442153",
     "source": {
       "owner": "manaty",
       "repo": "game-serpents",
       "fullName": "manaty/game-serpents",
       "url": "https://github.com/manaty/game-serpents",
-      "commit": "142e03b2dc3a103587f713ea9c08e5ed1548fd30"
+      "commit": "69bc7bd90d342bdcde6a9aba37198de62faeb265"
     },
     "fork": {
       "url": "https://github.com/manaty/game-serpents",
-      "commit": "142e03b2dc3a103587f713ea9c08e5ed1548fd30",
+      "commit": "69bc7bd90d342bdcde6a9aba37198de62faeb265",
       "official": true
     },
     "catalogType": "publisher_preview",
