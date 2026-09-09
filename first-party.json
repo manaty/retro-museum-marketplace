@@ -1396,7 +1396,7 @@
     "manifest": {
       "schemaVersion": 1,
       "id": "serpents",
-      "version": "1.0.2",
+      "version": "1.1.0",
       "title": {
         "en": "Serpents · Endless gardens",
         "fr": "Serpents · Jardins sans fin",
@@ -1468,17 +1468,17 @@
       },
       "cover": "cover.png"
     },
-    "sha256": "5c3313a3506242a25e54c356904822832d3038dfe9ccbfc8dfced6b0f6442153",
+    "sha256": "ca0a2a042c39ec2bb4657ba97c582330c616554a65564bfff4cb66db669e5102",
     "source": {
       "owner": "manaty",
       "repo": "game-serpents",
       "fullName": "manaty/game-serpents",
       "url": "https://github.com/manaty/game-serpents",
-      "commit": "69bc7bd90d342bdcde6a9aba37198de62faeb265"
+      "commit": "e247a95622b26b5ec5713cfdca384e1d5e710ef7"
     },
     "fork": {
       "url": "https://github.com/manaty/game-serpents",
-      "commit": "69bc7bd90d342bdcde6a9aba37198de62faeb265",
+      "commit": "e247a95622b26b5ec5713cfdca384e1d5e710ef7",
       "official": true
     },
     "catalogType": "publisher_preview",
