@@ -960,5 +960,93 @@
     "categories": [
       "board"
     ]
+  },
+  {
+    "id": "family-islands",
+    "categories": [
+      "action"
+    ],
+    "manifest": {
+      "schemaVersion": 1,
+      "id": "family-islands",
+      "version": "1.0.0",
+      "title": {
+        "en": "Family Islands",
+        "fr": "Les îles des familles",
+        "tl": "Mga Isla ng Pamilya"
+      },
+      "description": {
+        "en": "Two families on two destructible islands. Walk, jump and aim your shot before the timer ends. Grab parachute surprises and keep your family above water!",
+        "fr": "Deux familles sur deux îles destructibles. Marche, saute et vise avant la fin du chrono. Récupère les surprises parachutées et garde ta famille hors de l’eau !",
+        "tl": "Dalawang pamilya sa mga islang nasisira. Lumakad, tumalon at tumutok bago maubos ang oras. Kunin ang mga sorpresa at manatili sa lupa!"
+      },
+      "author": "Manaty",
+      "license": "MIT",
+      "languages": [
+        "en",
+        "fr",
+        "tl"
+      ],
+      "players": {
+        "min": 2,
+        "max": 12
+      },
+      "durationMinutes": 45,
+      "introMs": 3000,
+      "runtime": "quickjs-v1",
+      "entry": "dist/game.rmg.json",
+      "permissions": [],
+      "autoStartWhenFull": false,
+      "lobbyActions": [
+        "chooseCharacter"
+      ],
+      "activityKey": "family-islands",
+      "options": {
+        "turnSeconds": {
+          "label": {
+            "en": "Seconds per turn",
+            "fr": "Secondes par tour",
+            "tl": "Segundo bawat tira"
+          },
+          "values": [
+            30,
+            45,
+            60
+          ],
+          "default": 45
+        },
+        "crateEvery": {
+          "label": {
+            "en": "Surprise every N turns",
+            "fr": "Une surprise tous les N tours",
+            "tl": "Sorpresa bawat N tira"
+          },
+          "values": [
+            1,
+            2,
+            3
+          ],
+          "default": 2
+        }
+      },
+      "cover": "cover.png"
+    },
+    "sha256": "04a1da3362610f0ccbd454d35290d2ddd317716bbf34a99124383507125ff72c",
+    "source": {
+      "owner": "manaty",
+      "repo": "game-family-islands",
+      "fullName": "manaty/game-family-islands",
+      "url": "https://github.com/manaty/game-family-islands",
+      "commit": "43b76f58143e1c45673059d115f923b039299118"
+    },
+    "fork": {
+      "url": "https://github.com/manaty/game-family-islands",
+      "commit": "43b76f58143e1c45673059d115f923b039299118",
+      "official": true
+    },
+    "catalogType": "publisher_preview",
+    "playUrl": "https://play.retro-museum.net/g/family-islands",
+    "publisher": "Manaty",
+    "screenshot": "/screens/family-islands.png"
   }
 ]
